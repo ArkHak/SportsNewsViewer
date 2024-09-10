@@ -16,6 +16,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import o.mysin.sportsnewsviewer.features.detailsfeed.ui.DetailsFeedScreen
 import o.mysin.sportsnewsviewer.features.navigations.AppScreens
 import o.mysin.sportsnewsviewer.features.navigations.LocalNavHost
 import o.mysin.sportsnewsviewer.features.navigations.main.MainScreen
@@ -47,8 +48,10 @@ class AppActivity : ComponentActivity() {
                             composable(route = AppScreens.Main.title) {
                                 MainScreen()
                             }
+                            composable(route = AppScreens.Detail.title) {
+                                DetailsFeedScreen()
+                            }
                         }
-
                     }
                 }
             }
