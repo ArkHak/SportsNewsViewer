@@ -7,29 +7,28 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import kotlinx.serialization.Serializable
+import o.mysin.sportsnewsviewer.R
 import o.mysin.sportsnewsviewer.features.favorite.FavoriteScreen
 import o.mysin.sportsnewsviewer.features.navigations.LocalNavHost
 import o.mysin.sportsnewsviewer.features.news.NewsScreen
 import o.mysin.sportsnewsviewer.features.settings.SettingsScreen
+import o.mysin.sportsnewsviewer.ui.theme.SportsTheme
 
 sealed class MainScreens {
     @Serializable
@@ -45,12 +44,12 @@ sealed class MainScreens {
 
 enum class BottomTabs(
     val title: String,
-    val icon: ImageVector,
+    val icon: Int,
     val route: MainScreens,
 ) {
-    News("News", Icons.Default.Home, MainScreens.News),
-    Favorite("Favorite", Icons.Default.Favorite, MainScreens.Favorite),
-    SETTINGS("ScreenB", Icons.Default.Settings, MainScreens.Settings)
+    News("Новости", R.drawable.ic_list, MainScreens.News),
+    Favorite("Избранное", R.drawable.ic_favorite, MainScreens.Favorite),
+    Settings("Настройки", R.drawable.ic_settings, MainScreens.Settings)
 }
 
 @SuppressLint("RestrictedApi")
@@ -64,26 +63,33 @@ fun MainScreen() {
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
             BottomNavigation(
-                modifier = Modifier
-//                    .height(bottomNavigationHeight)
+                modifier = Modifier,
+                backgroundColor = MaterialTheme.colors.surface
             ) {
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
-                val currentDestination = navBackStackEntry?.destination
+                val currentDestination =
+                    navBackStackEntry?.destination?.route?.substringAfterLast(".")
 
                 items.forEach { screen ->
-                    val isSelected =
-                        currentDestination?.hierarchy?.any { it.route == screen.route.toString() } == true
+                    val isSelected = currentDestination == screen.route.toString()
                     BottomNavigationItem(
+                        selected = isSelected,
                         icon = {
                             Icon(
-                                imageVector = screen.icon,
-                                contentDescription = screen.title
+                                painter = painterResource(screen.icon),
+                                contentDescription = screen.title,
+                                tint = if (isSelected) SportsTheme.colors.accentColor else SportsTheme.colors.secondaryText,
                             )
                         },
                         label = {
-                            Text(text = screen.title)
+                            Text(
+                                text = screen.title,
+                                fontSize = 12.sp,
+                                color = if (isSelected) SportsTheme.colors.accentColor else SportsTheme.colors.secondaryText,
+                            )
                         },
-                        selected = isSelected,
+                        selectedContentColor = SportsTheme.colors.accentColor,
+                        unselectedContentColor = SportsTheme.colors.secondaryText,
                         onClick = {
                             navController.navigate(screen.route) {
                                 popUpTo(navController.graph.findStartDestination().displayName) {

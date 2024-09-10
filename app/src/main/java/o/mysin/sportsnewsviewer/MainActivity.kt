@@ -13,14 +13,14 @@ import androidx.navigation.compose.rememberNavController
 import o.mysin.sportsnewsviewer.features.navigations.AppScreens
 import o.mysin.sportsnewsviewer.features.navigations.LocalNavHost
 import o.mysin.sportsnewsviewer.features.navigations.main.MainScreen
-import o.mysin.sportsnewsviewer.ui.theme.SportsNewsViewerTheme
+import o.mysin.sportsnewsviewer.ui.theme.AppTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        enableEdgeToEdge()
         setContent {
-            SportsNewsViewerTheme {
+            AppTheme {
                 val navController: NavHostController = rememberNavController()
                 val backStackEntry by navController.currentBackStackEntryAsState()
                 val currentScreen = backStackEntry?.destination?.route ?: AppScreens.Main.title
