@@ -1,17 +1,17 @@
-package o.mysin.sportsnewsviewer.features.news
+package o.mysin.sportsnewsviewer.features.feeds
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 
 @Composable
-internal fun NewsView(
+internal fun FeedsView(
 //    viewState: NewsViewState,
 //    eventHandler: (NewsEvent) -> Unit,
 ) {
 
     Column {
-        Text("News")
+        Text("Feeds")
     }
 
 }

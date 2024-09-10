@@ -23,13 +23,13 @@ import kotlinx.serialization.Serializable
 import o.mysin.sportsnewsviewer.R
 import o.mysin.sportsnewsviewer.features.favorite.FavoriteScreen
 import o.mysin.sportsnewsviewer.features.navigations.LocalNavHost
-import o.mysin.sportsnewsviewer.features.news.NewsScreen
+import o.mysin.sportsnewsviewer.features.feeds.FeedsScreen
 import o.mysin.sportsnewsviewer.features.settings.SettingsScreen
 import o.mysin.sportsnewsviewer.ui.theme.SportsTheme
 
 private sealed class MainScreens {
     @Serializable
-    data object News : MainScreens()
+    data object Feeds : MainScreens()
 
     @Serializable
     data object Favorite : MainScreens()
@@ -44,12 +44,12 @@ private enum class BottomTabs(
     val icon: Int,
     val route: MainScreens,
 ) {
-    News("Новости", R.drawable.ic_feed, MainScreens.News),
+    News("Новости", R.drawable.ic_feed, MainScreens.Feeds),
     Favorite("Избранное", R.drawable.ic_favorite, MainScreens.Favorite),
     Settings("Настройки", R.drawable.ic_settings, MainScreens.Settings)
 }
 
-private val startDestinationScreen = MainScreens.News
+private val startDestinationScreen = MainScreens.Feeds
 
 @SuppressLint("RestrictedApi")
 @Composable
@@ -109,7 +109,7 @@ fun MainScreen() {
                 .fillMaxHeight(),
             startDestination = startDestinationScreen
         ) {
-            composable<MainScreens.News> { NewsScreen() }
+            composable<MainScreens.Feeds> { FeedsScreen() }
             composable<MainScreens.Favorite> { FavoriteScreen() }
             composable<MainScreens.Settings> { SettingsScreen() }
         }
