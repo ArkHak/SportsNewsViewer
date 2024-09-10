@@ -1,7 +1,6 @@
 package o.mysin.sportsnewsviewer.features.navigations.main
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -15,9 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -30,7 +27,7 @@ import o.mysin.sportsnewsviewer.features.news.NewsScreen
 import o.mysin.sportsnewsviewer.features.settings.SettingsScreen
 import o.mysin.sportsnewsviewer.ui.theme.SportsTheme
 
-sealed class MainScreens {
+private sealed class MainScreens {
     @Serializable
     data object News : MainScreens()
 
@@ -42,15 +39,17 @@ sealed class MainScreens {
 }
 
 
-enum class BottomTabs(
+private enum class BottomTabs(
     val title: String,
     val icon: Int,
     val route: MainScreens,
 ) {
-    News("Новости", R.drawable.ic_list, MainScreens.News),
+    News("Новости", R.drawable.ic_feed, MainScreens.News),
     Favorite("Избранное", R.drawable.ic_favorite, MainScreens.Favorite),
     Settings("Настройки", R.drawable.ic_settings, MainScreens.Settings)
 }
+
+private val startDestinationScreen = MainScreens.News
 
 @SuppressLint("RestrictedApi")
 @Composable
@@ -58,7 +57,6 @@ fun MainScreen() {
     val outerNavController = LocalNavHost.current
     val navController = rememberNavController()
     val items = BottomTabs.entries.toTypedArray()
-    val bottomNavigationHeight = 75.dp
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
@@ -92,7 +90,7 @@ fun MainScreen() {
                         unselectedContentColor = SportsTheme.colors.secondaryText,
                         onClick = {
                             navController.navigate(screen.route) {
-                                popUpTo(navController.graph.findStartDestination().displayName) {
+                                popUpTo(startDestinationScreen) {
                                     saveState = true
                                 }
                                 launchSingleTop = true
@@ -104,18 +102,12 @@ fun MainScreen() {
             }
         }
     ) { innerPadding ->
-        Box(
-            modifier = Modifier
-                .padding(innerPadding)
-        ) {
-
-        }
         NavHost(
             navController = navController,
             modifier = Modifier
-                .padding(bottom = bottomNavigationHeight)
+                .padding(innerPadding)
                 .fillMaxHeight(),
-            startDestination = MainScreens.News
+            startDestination = startDestinationScreen
         ) {
             composable<MainScreens.News> { NewsScreen() }
             composable<MainScreens.Favorite> { FavoriteScreen() }
