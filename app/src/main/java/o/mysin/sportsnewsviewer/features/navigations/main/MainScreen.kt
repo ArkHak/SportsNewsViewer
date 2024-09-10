@@ -23,7 +23,7 @@ import kotlinx.serialization.Serializable
 import o.mysin.sportsnewsviewer.R
 import o.mysin.sportsnewsviewer.features.favorite.FavoriteScreen
 import o.mysin.sportsnewsviewer.features.navigations.LocalNavHost
-import o.mysin.sportsnewsviewer.features.feeds.FeedsScreen
+import o.mysin.sportsnewsviewer.features.feeds.ui.FeedsScreen
 import o.mysin.sportsnewsviewer.features.settings.SettingsScreen
 import o.mysin.sportsnewsviewer.ui.theme.SportsTheme
 
