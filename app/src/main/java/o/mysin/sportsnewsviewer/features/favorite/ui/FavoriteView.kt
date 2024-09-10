@@ -1,4 +1,4 @@
-package o.mysin.sportsnewsviewer.features.feeds.ui
+package o.mysin.sportsnewsviewer.features.favorite.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -9,8 +9,8 @@ import androidx.compose.ui.unit.dp
 import o.mysin.sportsnewsviewer.features.feeds.ui.views.FeedCard
 
 @Composable
-internal fun FeedsView(
-//    viewState: NewsViewState,
+internal fun FavoriteView(
+//    viewState: FavoriteViewState,
 //    eventHandler: (NewsEvent) -> Unit,
 ) {
 
@@ -19,8 +19,7 @@ internal fun FeedsView(
             .padding(6.dp)
     ) {
         LazyColumn {
-            items(10) { FeedCard() }
+            items(2) { FeedCard() }
         }
     }
-
 }

@@ -21,7 +21,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import kotlinx.serialization.Serializable
 import o.mysin.sportsnewsviewer.R
-import o.mysin.sportsnewsviewer.features.favorite.FavoriteScreen
+import o.mysin.sportsnewsviewer.features.favorite.ui.FavoriteScreen
 import o.mysin.sportsnewsviewer.features.navigations.LocalNavHost
 import o.mysin.sportsnewsviewer.features.feeds.ui.FeedsScreen
 import o.mysin.sportsnewsviewer.features.settings.ui.SettingsScreen
