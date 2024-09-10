@@ -32,7 +32,7 @@ import o.mysin.sportsnewsviewer.R
 import o.mysin.sportsnewsviewer.ui.theme.SportsTheme
 
 @Composable
-fun FeedCard() {
+internal fun FeedCard() {
 
     Card(
         modifier = Modifier

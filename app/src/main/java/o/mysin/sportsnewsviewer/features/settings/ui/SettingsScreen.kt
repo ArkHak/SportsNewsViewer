@@ -1,4 +1,4 @@
-package o.mysin.sportsnewsviewer.features.settings
+package o.mysin.sportsnewsviewer.features.settings.ui
 
 import androidx.compose.runtime.Composable
 
