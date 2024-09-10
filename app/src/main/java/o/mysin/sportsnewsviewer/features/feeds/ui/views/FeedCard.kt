@@ -35,6 +35,8 @@ import o.mysin.sportsnewsviewer.ui.theme.SportsTheme
 fun FeedCard() {
 
     Card(
+        modifier = Modifier
+            .padding(vertical = 4.dp),
         colors = CardColors(
             contentColor = SportsTheme.colors.primaryBackground,
             containerColor = SportsTheme.colors.primaryBackground,
