@@ -19,7 +19,11 @@ internal fun FavoriteView(
             .padding(6.dp)
     ) {
         LazyColumn {
-            items(2) { FeedCard() }
+            items(2) {
+                FeedCard {
+                    // eventHandler.invoke(FeedsEvent.FeedClicked)
+                }
+            }
         }
     }
 }

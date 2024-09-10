@@ -26,14 +26,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import o.mysin.sportsnewsviewer.R
 import o.mysin.sportsnewsviewer.ui.theme.SportsTheme
 
 @Composable
-internal fun FeedCard() {
-
+internal fun FeedCard(
+    feedClicked: () -> Unit,
+) {
     Card(
         modifier = Modifier
             .padding(vertical = 4.dp),
@@ -44,7 +45,8 @@ internal fun FeedCard() {
             disabledContentColor = SportsTheme.colors.primaryBackground,
         ),
         border = BorderStroke(width = 1.dp, color = Color.Gray),
-        shape = ShapeDefaults.ExtraSmall
+        shape = ShapeDefaults.ExtraSmall,
+        onClick = { feedClicked() }
     ) {
         Column(
             modifier = Modifier
@@ -53,14 +55,14 @@ internal fun FeedCard() {
             verticalArrangement = Arrangement.Center
         ) {
             //TODO Вставить релевантные значение из вне
-            PostCardHeader(
+            FeedCardHeader(
                 title = "Текст новости",
                 imageSrc = " "
             )
 
             Spacer(Modifier.height(14.dp))
 
-            PostCardBottom(
+            FeedCardBottom(
                 dateTime = "10:30 10.10.2023"
             )
         }
@@ -68,7 +70,7 @@ internal fun FeedCard() {
 }
 
 @Composable
-private fun PostCardHeader(
+private fun FeedCardHeader(
     title: String,
     imageSrc: String,
 ) {
@@ -90,6 +92,7 @@ private fun PostCardHeader(
 
         Text(
             text = title,
+            fontSize = 16.sp,
             color = SportsTheme.colors.primaryText,
             fontFamily = FontFamily.SansSerif,
             fontWeight = FontWeight.SemiBold,
@@ -101,7 +104,7 @@ private fun PostCardHeader(
 }
 
 @Composable
-private fun PostCardBottom(
+private fun FeedCardBottom(
     dateTime: String,
 ) {
     Row(
@@ -119,6 +122,7 @@ private fun PostCardBottom(
             modifier = Modifier
                 .padding(horizontal = 4.dp),
             text = "33",
+            fontSize = 14.sp,
             color = SportsTheme.colors.secondaryText,
             fontFamily = FontFamily.SansSerif,
             fontWeight = FontWeight.SemiBold,
@@ -129,16 +133,11 @@ private fun PostCardBottom(
 
         Text(
             text = dateTime,
+            fontSize = 14.sp,
             color = SportsTheme.colors.secondaryText,
             fontFamily = FontFamily.SansSerif,
             maxLines = 1,
         )
 
     }
-}
-
-@Preview
-@Composable
-private fun FeedCardPreview() {
-    FeedCard()
 }

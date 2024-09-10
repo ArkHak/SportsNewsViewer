@@ -1,4 +1,5 @@
 package o.mysin.sportsnewsviewer.features.feeds.presentation.models
 
-class FeedsEvent {
+internal sealed class FeedsEvent {
+    data object FeedClicked : FeedsEvent()
 }

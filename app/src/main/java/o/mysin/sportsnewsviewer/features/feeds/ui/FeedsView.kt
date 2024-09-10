@@ -6,12 +6,13 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import o.mysin.sportsnewsviewer.features.feeds.presentation.models.FeedsEvent
 import o.mysin.sportsnewsviewer.features.feeds.ui.views.FeedCard
 
 @Composable
 internal fun FeedsView(
 //    viewState: NewsViewState,
-//    eventHandler: (NewsEvent) -> Unit,
+    eventHandler: (FeedsEvent) -> Unit,
 ) {
 
     Column(
@@ -19,7 +20,11 @@ internal fun FeedsView(
             .padding(6.dp)
     ) {
         LazyColumn {
-            items(10) { FeedCard() }
+            items(10) {
+                FeedCard {
+                    eventHandler.invoke(FeedsEvent.FeedClicked)
+                }
+            }
         }
     }
 
