@@ -1,5 +1,6 @@
 package o.mysin.sportsnewsviewer.data.mappers
 
+import android.text.Html
 import o.mysin.sportsnewsviewer.base.Mapper
 import o.mysin.sportsnewsviewer.data.dto.NewsDetailsDTO
 import o.mysin.sportsnewsviewer.data.model.NewsDetailsUI
@@ -13,7 +14,22 @@ class MapNewsDetailsDTOToNewsDetailsUI : Mapper<NewsDetailsDTO, NewsDetailsUI> {
             commentCount = data.commentCount,
             socialImage = data.socialImage,
             postedTime = FormatterDate.formatDate(data.postedTime),
-            description = data.description
+            description = clearHtml(data.description)
         )
     }
 }
+
+private fun clearHtml(htmlText: String): String {
+    val dirtyText = Html.fromHtml(htmlText, Html.FROM_HTML_MODE_LEGACY).toString()
+    return getSubStringAfterFirstNewLine(dirtyText).trim()
+}
+
+private fun getSubStringAfterFirstNewLine(text: String): String {
+    val newLineIndex = text.indexOf('\n')
+    return if (newLineIndex != -1) {
+        text.substring(newLineIndex + 1)
+    } else {
+        text
+    }
+}
+
