@@ -13,7 +13,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 internal fun FeedsScreen(
     feedsViewModel: FeedsViewModel = koinViewModel(),
-    feedClick: () -> Unit,
+    feedClick: (Int) -> Unit,
 ) {
     val viewState by feedsViewModel.viewStates().collectAsState()
     val viewAction by feedsViewModel.viewActions().collectAsState(null)
@@ -38,9 +38,11 @@ internal fun FeedsScreen(
         StatusScreen.ERROR -> {}
     }
 
+    //TODO Разобраться с Кастом
     when (viewAction) {
-        FeedsAction.OpenDetailFeedScreen -> {
-            feedClick()
+        is FeedsAction.OpenDetailFeedScreen -> {
+            val id = (viewAction as FeedsAction.OpenDetailFeedScreen).feedId
+            feedClick(id)
             feedsViewModel.clearAction()
         }
 

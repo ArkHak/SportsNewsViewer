@@ -23,8 +23,8 @@ internal fun FeedsView(
     ) {
         LazyColumn {
             items(viewState.newsList) { newsItem ->
-                FeedCard(newsItem) {
-                    eventHandler.invoke(FeedsEvent.FeedClicked)
+                FeedCard(newsItem) { feedId ->
+                    eventHandler.invoke(FeedsEvent.FeedClicked(feedId))
                 }
             }
         }

@@ -10,7 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.Icon
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
 import androidx.compose.material3.ShapeDefaults
@@ -38,7 +38,7 @@ import o.mysin.sportsnewsviewer.ui.theme.SportsTheme
 @Composable
 internal fun FeedCard(
     news: NewsItemUI,
-    feedClicked: () -> Unit,
+    feedClicked: (Int) -> Unit,
 ) {
     Card(
         modifier = Modifier
@@ -51,7 +51,7 @@ internal fun FeedCard(
         ),
         border = BorderStroke(width = 1.dp, color = Color.Gray),
         shape = ShapeDefaults.ExtraSmall,
-        onClick = { feedClicked() }
+        onClick = { feedClicked(news.id) }
     ) {
         Column(
             modifier = Modifier
@@ -59,7 +59,6 @@ internal fun FeedCard(
                 .padding(8.dp),
             verticalArrangement = Arrangement.Center
         ) {
-            //TODO Вставить релевантные значение из вне
             FeedCardHeader(
                 title = news.title,
                 imageSrc = news.socialImage

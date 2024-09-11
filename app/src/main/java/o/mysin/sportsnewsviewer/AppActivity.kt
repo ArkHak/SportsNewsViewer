@@ -14,6 +14,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import o.mysin.sportsnewsviewer.features.detailsfeed.ui.DetailsFeedScreen
 import o.mysin.sportsnewsviewer.features.navigations.AppScreens
 import o.mysin.sportsnewsviewer.features.navigations.LocalNavHost
@@ -45,7 +46,8 @@ class AppActivity : ComponentActivity() {
                                 MainScreen()
                             }
                             composable<AppScreens.Detail> {
-                                DetailsFeedScreen() {
+                                val args = it.toRoute<AppScreens.Detail>()
+                                DetailsFeedScreen(args.feedId) {
                                     navController.popBackStack()
                                 }
                             }

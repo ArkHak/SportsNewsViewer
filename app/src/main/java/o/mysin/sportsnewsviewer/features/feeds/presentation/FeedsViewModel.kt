@@ -9,27 +9,27 @@ import o.mysin.sportsnewsviewer.features.feeds.presentation.models.FeedsAction
 import o.mysin.sportsnewsviewer.features.feeds.presentation.models.FeedsEvent
 import o.mysin.sportsnewsviewer.features.feeds.presentation.models.FeedsViewState
 import o.mysin.sportsnewsviewer.features.feeds.presentation.models.StatusScreen
-import o.mysin.sportsnewsviewer.features.feeds.presentation.usecase.GetNewsUseCase
+import o.mysin.sportsnewsviewer.features.feeds.presentation.usecase.GetNewsListUseCase
 
 internal class FeedsViewModel(
-    private val getNewsUseCase: GetNewsUseCase,
+    private val getNewsListUseCase: GetNewsListUseCase,
     private val toNewsItemUI: MapNewsItemDTOToNewsItemUI,
 ) :
     BaseViewModel<FeedsViewState, FeedsAction, FeedsEvent>(initialState = FeedsViewState()) {
 
     override fun obtainEvent(viewEvent: FeedsEvent) {
         when (viewEvent) {
-            FeedsEvent.FeedClicked -> feedClicked()
             FeedsEvent.LoadingData -> loadingNews()
+            is FeedsEvent.FeedClicked -> {
+                feedClicked(viewEvent.feedId)
+            }
         }
     }
-
-    //val userUI = toUserUI.transform(userNetwork)
 
     private fun loadingNews() {
         viewState = viewState.copy(isStatus = StatusScreen.LOADING)
         viewModelScope.launch {
-            when (val eitherResponse = getNewsUseCase.invoke()) {
+            when (val eitherResponse = getNewsListUseCase.invoke()) {
                 is Either.Success -> {
                     viewState = viewState.copy(
                         newsList = eitherResponse.value.listNews.map { newsItemDTO ->
@@ -44,11 +44,10 @@ internal class FeedsViewModel(
                 }
             }
         }
-
     }
 
-    private fun feedClicked() {
-        viewAction = FeedsAction.OpenDetailFeedScreen
+    private fun feedClicked(feedId: Int) {
+        viewAction = FeedsAction.OpenDetailFeedScreen(feedId)
     }
 
 }

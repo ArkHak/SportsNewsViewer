@@ -1,6 +1,5 @@
 package o.mysin.sportsnewsviewer.features.detailsfeed.ui
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,19 +22,23 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.SubcomposeAsyncImage
+import coil.request.ImageRequest
 import o.mysin.sportsnewsviewer.R
 import o.mysin.sportsnewsviewer.features.detailsfeed.presentation.models.DetailsFeedEvent
-import o.mysin.sportsnewsviewer.features.favorite.presentation.models.FavoriteEvent
+import o.mysin.sportsnewsviewer.features.detailsfeed.presentation.models.DetailsFeedViewState
+import o.mysin.sportsnewsviewer.ui.common.LoadingIndicator
 import o.mysin.sportsnewsviewer.ui.theme.SportsTheme
 
 @Composable
 internal fun DetailsFeedView(
-//    viewState: NewsViewState,
+    viewState: DetailsFeedViewState,
     eventHandler: (DetailsFeedEvent) -> Unit,
 ) {
 
@@ -87,7 +90,8 @@ internal fun DetailsFeedView(
                 .padding(16.dp)
         ) {
             FeedHeader(
-                title = "«Реал» прописал отступные 1 млрд евро в контрактах Вальверде и Камавинга из-за опасений насчет предложений из Саудовской Аравии (COPE)"
+                title = viewState.newsDetails.title,
+                imageSrc = viewState.newsDetails.socialImage,
             )
 
             Divider(
@@ -97,64 +101,8 @@ internal fun DetailsFeedView(
             )
 
             FeedBottom(
-                description = " Details Screeen asdasdas" +
-                        "d asd asdasd " +
-                        "asd" +
-                        "a sd asdasd" +
-                        "a sd" +
-                        "a s" +
-                        "d" +
-                        "«Аль-Духайль» объявил о назначении Кристофа Гальтье на пост главного тренера.\n" +
-                        "\n" +
-                        "Экс-тренер «ПСЖ» заменил на этой должности аргентинца Эрнана Креспо, уволенного после 1 победы в 5 последних матчах.\n" +
-                        "\n" +
-                        "Кристоф Гальтье покинул «ПСЖ» в июле этого года. В сентябре сообщалось, что по поводу возможного назначения с ним общались «Наполи» и «Марсель»." +
-                        "«Аль-Духайль» объявил о назначении Кристофа Гальтье на пост главного тренера.\n" +
-                        "\n" +
-                        "Экс-тренер «ПСЖ» заменил на этой должности аргентинца Эрнана Креспо, уволенного после 1 победы в 5 последних матчах.\n" +
-                        "\n" +
-                        "Кристоф Гальтье покинул «ПСЖ» в июле этого года. В сентябре сообщалось, что по поводу возможного назначения с ним общались «Наполи» и «Марсель»." +
-                        "«Аль-Духайль» объявил о назначении Кристофа Гальтье на пост главного тренера.\n" +
-                        "\n" +
-                        "Экс-тренер «ПСЖ» заменил на этой должности аргентинца Эрнана Креспо, уволенного после 1 победы в 5 последних матчах.\n" +
-                        "\n" +
-                        "Кристоф Гальтье покинул «ПСЖ» в июле этого года. В сентябре сообщалось, что по поводу возможного назначения с ним общались «Наполи» и «Марсель»." +
-                        "«Аль-Духайль» объявил о назначении Кристофа Гальтье на пост главного тренера.\n" +
-                        "\n" +
-                        "Экс-тренер «ПСЖ» заменил на этой должности аргентинца Эрнана Креспо, уволенного после 1 победы в 5 последних матчах.\n" +
-                        "\n" +
-                        "Кристоф Гальтье покинул «ПСЖ» в июле этого года. В сентябре сообщалось, что по поводу возможного назначения с ним общались «Наполи» и «Марсель»." +
-                        "«Аль-Духайль» объявил о назначении Кристофа Гальтье на пост главного тренера.\n" +
-                        "\n" +
-                        "Экс-тренер «ПСЖ» заменил на этой должности аргентинца Эрнана Креспо, уволенного после 1 победы в 5 последних матчах.\n" +
-                        "\n" +
-                        "Кристоф Гальтье покинул «ПСЖ» в июле этого года. В сентябре сообщалось, что по поводу возможного назначения с ним общались «Наполи» и «Марсель»." +
-                        "«Аль-Духайль» объявил о назначении Кристофа Гальтье на пост главного тренера.\n" +
-                        "\n" +
-                        "Экс-тренер «ПСЖ» заменил на этой должности аргентинца Эрнана Креспо, уволенного после 1 победы в 5 последних матчах.\n" +
-                        "\n" +
-                        "Кристоф Гальтье покинул «ПСЖ» в июле этого года. В сентябре сообщалось, что по поводу возможного назначения с ним общались «Наполи» и «Марсель»." +
-                        "«Аль-Духайль» объявил о назначении Кристофа Гальтье на пост главного тренера.\n" +
-                        "\n" +
-                        "Экс-тренер «ПСЖ» заменил на этой должности аргентинца Эрнана Креспо, уволенного после 1 победы в 5 последних матчах.\n" +
-                        "\n" +
-                        "Кристоф Гальтье покинул «ПСЖ» в июле этого года. В сентябре сообщалось, что по поводу возможного назначения с ним общались «Наполи» и «Марсель»." +
-                        "«Аль-Духайль» объявил о назначении Кристофа Гальтье на пост главного тренера.\n" +
-                        "\n" +
-                        "Экс-тренер «ПСЖ» заменил на этой должности аргентинца Эрнана Креспо, уволенного после 1 победы в 5 последних матчах.\n" +
-                        "\n" +
-                        "Кристоф Гальтье покинул «ПСЖ» в июле этого года. В сентябре сообщалось, что по поводу возможного назначения с ним общались «Наполи» и «Марсель»." +
-                        "«Аль-Духайль» объявил о назначении Кристофа Гальтье на пост главного тренера.\n" +
-                        "\n" +
-                        "Экс-тренер «ПСЖ» заменил на этой должности аргентинца Эрнана Креспо, уволенного после 1 победы в 5 последних матчах.\n" +
-                        "\n" +
-                        "Кристоф Гальтье покинул «ПСЖ» в июле этого года. В сентябре сообщалось, что по поводу возможного назначения с ним общались «Наполи» и «Марсель»." +
-                        "«Аль-Духайль» объявил о назначении Кристофа Гальтье на пост главного тренера.\n" +
-                        "\n" +
-                        "Экс-тренер «ПСЖ» заменил на этой должности аргентинца Эрнана Креспо, уволенного после 1 победы в 5 последних матчах.\n" +
-                        "\n" +
-                        "Кристоф Гальтье покинул «ПСЖ» в июле этого года. В сентябре сообщалось, что по поводу возможного назначения с ним общались «Наполи» и «Марсель».",
-                dateTime = "10:30 10.10.2023"
+                description = viewState.newsDetails.description,
+                dateTime = viewState.newsDetails.postedTime,
             )
 
         }
@@ -166,6 +114,7 @@ internal fun DetailsFeedView(
 @Composable
 private fun FeedHeader(
     title: String,
+    imageSrc: String,
 ) {
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -176,12 +125,21 @@ private fun FeedHeader(
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.Center
         ) {
-            Image(
+            SubcomposeAsyncImage(
                 modifier = Modifier
                     .height(196.dp)
                     .clip(ShapeDefaults.ExtraSmall),
-                painter = painterResource(R.drawable.test_image_post),
-                contentDescription = "aaaa",
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(imageSrc)
+                    .crossfade(true)
+                    .build(),
+                loading = {
+                    LoadingIndicator()
+                },
+                error = {
+                    painterResource(R.drawable.not_found)
+                },
+                contentDescription = title,
                 contentScale = ContentScale.Fit,
             )
 

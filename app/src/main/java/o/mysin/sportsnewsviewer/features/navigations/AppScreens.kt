@@ -7,5 +7,5 @@ internal sealed class AppScreens {
     data object Main : AppScreens()
 
     @Serializable
-    data object Detail : AppScreens()
+    data class Detail(val feedId: Int) : AppScreens()
 }
