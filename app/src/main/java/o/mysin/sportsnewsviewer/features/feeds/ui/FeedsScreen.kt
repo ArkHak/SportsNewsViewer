@@ -3,13 +3,13 @@ package o.mysin.sportsnewsviewer.features.feeds.ui
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.lifecycle.viewmodel.compose.viewModel
 import o.mysin.sportsnewsviewer.features.feeds.presentation.FeedsViewModel
 import o.mysin.sportsnewsviewer.features.feeds.presentation.models.FeedsAction
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 internal fun FeedsScreen(
-    feedsViewModel: FeedsViewModel = viewModel { FeedsViewModel() },
+    feedsViewModel: FeedsViewModel = koinViewModel(),
     feedClick: () -> Unit,
 ) {
     val viewState by feedsViewModel.viewStates().collectAsState()
