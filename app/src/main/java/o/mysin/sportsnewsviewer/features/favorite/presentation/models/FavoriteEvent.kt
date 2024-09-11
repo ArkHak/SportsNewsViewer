@@ -1,4 +1,5 @@
 package o.mysin.sportsnewsviewer.features.favorite.presentation.models
 
-class FavoriteEvent {
+internal sealed class FavoriteEvent {
+    data object FeedClicked : FavoriteEvent()
 }

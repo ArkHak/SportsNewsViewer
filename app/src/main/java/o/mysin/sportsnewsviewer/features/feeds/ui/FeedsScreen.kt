@@ -3,27 +3,45 @@ package o.mysin.sportsnewsviewer.features.feeds.ui
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.lifecycle.viewmodel.compose.viewModel
 import o.mysin.sportsnewsviewer.features.feeds.presentation.FeedsViewModel
 import o.mysin.sportsnewsviewer.features.feeds.presentation.models.FeedsAction
-import o.mysin.sportsnewsviewer.features.navigations.AppScreens
-import o.mysin.sportsnewsviewer.features.navigations.LocalNavHost
+import o.mysin.sportsnewsviewer.features.feeds.presentation.models.FeedsEvent
+import o.mysin.sportsnewsviewer.features.feeds.presentation.models.StatusScreen
+import o.mysin.sportsnewsviewer.ui.common.LoadingIndicator
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 internal fun FeedsScreen(
-    feedsViewModel: FeedsViewModel = viewModel { FeedsViewModel() },
+    feedsViewModel: FeedsViewModel = koinViewModel(),
+    feedClick: (Int) -> Unit,
 ) {
-    val outerNavController = LocalNavHost.current
     val viewState by feedsViewModel.viewStates().collectAsState()
     val viewAction by feedsViewModel.viewActions().collectAsState(null)
 
-    FeedsView { event ->
-        feedsViewModel.obtainEvent(event)
+    when (viewState.isStatus) {
+        StatusScreen.NULL -> {
+            feedsViewModel.obtainEvent(FeedsEvent.LoadingData)
+        }
+
+        StatusScreen.SUCCESS -> {
+            FeedsView(
+                viewState = viewState
+            ) { event ->
+                feedsViewModel.obtainEvent(event)
+            }
+        }
+
+        StatusScreen.LOADING -> {
+            LoadingIndicator()
+        }
+
+        StatusScreen.ERROR -> {}
     }
 
     when (viewAction) {
-        FeedsAction.OpenDetailFeedScreen -> {
-            outerNavController.navigate(AppScreens.Detail.title)
+        is FeedsAction.OpenDetailFeedScreen -> {
+            val id = (viewAction as FeedsAction.OpenDetailFeedScreen).feedId
+            feedClick(id)
             feedsViewModel.clearAction()
         }
 

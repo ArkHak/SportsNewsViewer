@@ -51,7 +51,24 @@ dependencies {
     implementation(libs.androidx.material3)
     androidTestImplementation(platform(libs.androidx.compose.bom))
 
-    implementation(libs.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.compose.material)
+
+    //Jetpack Navigation
+    implementation(libs.navigation.compose)
+
+    //Koin
+    implementation(libs.koin.android)
+    implementation(libs.koin.compose)
+
+    //Ktor
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.logging)
+    implementation(libs.ktor.client.content.negotiation)
+    implementation(libs.ktor.engine.cio)
+    implementation(libs.ktor.serialization.json)
+
+    //Coil
+    implementation(libs.compose.coil)
+
 }

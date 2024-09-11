@@ -1,31 +1,68 @@
 package o.mysin.sportsnewsviewer.features.feeds.ui
 
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.pulltorefresh.PullToRefreshContainer
+import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import o.mysin.sportsnewsviewer.features.feeds.presentation.models.FeedsEvent
+import o.mysin.sportsnewsviewer.features.feeds.presentation.models.FeedsViewState
 import o.mysin.sportsnewsviewer.features.feeds.ui.views.FeedCard
+import o.mysin.sportsnewsviewer.ui.theme.SportsTheme
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun FeedsView(
-//    viewState: NewsViewState,
+    viewState: FeedsViewState,
     eventHandler: (FeedsEvent) -> Unit,
 ) {
 
-    Column(
-        modifier = Modifier
+    val pullToRefreshState = rememberPullToRefreshState()
+
+    if (pullToRefreshState.isRefreshing) {
+        LaunchedEffect(true) {
+            eventHandler.invoke(FeedsEvent.FeedsRefresh)
+        }
+    }
+
+    if (!viewState.isRefreshingStatus) {
+        pullToRefreshState.endRefresh()
+    }
+
+    Box(
+        Modifier
+            .fillMaxSize()
             .padding(6.dp)
     ) {
-        LazyColumn {
-            items(10) {
-                FeedCard {
-                    eventHandler.invoke(FeedsEvent.FeedClicked)
+        LazyColumn(
+            modifier = Modifier
+                .nestedScroll(pullToRefreshState.nestedScrollConnection)
+        ) {
+            items(viewState.newsList) { newsItem ->
+                FeedCard(newsItem) { feedId ->
+                    eventHandler.invoke(FeedsEvent.FeedClicked(feedId))
                 }
             }
         }
+
+        PullToRefreshContainer(
+            state = pullToRefreshState,
+            modifier = Modifier.align(
+                Alignment.TopCenter,
+            ),
+            containerColor = SportsTheme.colors.primaryBackground,
+            contentColor = SportsTheme.colors.accentColor
+        )
     }
+
 
 }

@@ -6,12 +6,13 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import o.mysin.sportsnewsviewer.features.favorite.presentation.models.FavoriteEvent
 import o.mysin.sportsnewsviewer.features.feeds.ui.views.FeedCard
 
 @Composable
 internal fun FavoriteView(
 //    viewState: FavoriteViewState,
-//    eventHandler: (NewsEvent) -> Unit,
+    eventHandler: (FavoriteEvent) -> Unit,
 ) {
 
     Column(
@@ -20,9 +21,9 @@ internal fun FavoriteView(
     ) {
         LazyColumn {
             items(2) {
-                FeedCard {
-                    // eventHandler.invoke(FeedsEvent.FeedClicked)
-                }
+//                FeedCard() {
+//                    eventHandler.invoke(FavoriteEvent.FeedClicked)
+//                }
             }
         }
     }
