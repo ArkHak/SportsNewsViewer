@@ -23,7 +23,18 @@ internal class FeedsViewModel(
             is FeedsEvent.FeedClicked -> {
                 feedClicked(viewEvent.feedId)
             }
+
+            FeedsEvent.FeedsRefresh -> {
+                feedsListRefresh()
+                loadingNews()
+            }
         }
+    }
+
+    private fun feedsListRefresh() {
+        viewState = viewState.copy(isRefreshingStatus = true)
+        loadingNews()
+        viewState = viewState.copy(isRefreshingStatus = false)
     }
 
     private fun loadingNews() {

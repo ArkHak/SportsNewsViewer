@@ -38,7 +38,6 @@ internal fun FeedsScreen(
         StatusScreen.ERROR -> {}
     }
 
-    //TODO Разобраться с Кастом
     when (viewAction) {
         is FeedsAction.OpenDetailFeedScreen -> {
             val id = (viewAction as FeedsAction.OpenDetailFeedScreen).feedId
