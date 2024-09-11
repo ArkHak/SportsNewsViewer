@@ -66,4 +66,7 @@ dependencies {
     implementation(libs.ktor.engine.cio)
     implementation(libs.ktor.serialization.json)
 
+    //Coil
+    implementation(libs.compose.coil)
+
 }

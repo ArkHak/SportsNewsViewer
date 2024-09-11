@@ -21,9 +21,9 @@ internal fun FavoriteView(
     ) {
         LazyColumn {
             items(2) {
-                FeedCard {
-                    eventHandler.invoke(FavoriteEvent.FeedClicked)
-                }
+//                FeedCard() {
+//                    eventHandler.invoke(FavoriteEvent.FeedClicked)
+//                }
             }
         }
     }

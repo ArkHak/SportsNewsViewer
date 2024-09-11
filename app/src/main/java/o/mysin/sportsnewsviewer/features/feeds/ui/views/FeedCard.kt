@@ -1,7 +1,6 @@
 package o.mysin.sportsnewsviewer.features.feeds.ui.views
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,17 +21,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.SubcomposeAsyncImage
+import coil.request.ImageRequest
 import o.mysin.sportsnewsviewer.R
+import o.mysin.sportsnewsviewer.data.NewsItem
+import o.mysin.sportsnewsviewer.ui.common.LoadingIndicator
 import o.mysin.sportsnewsviewer.ui.theme.SportsTheme
 
 @Composable
 internal fun FeedCard(
+    news: NewsItem,
     feedClicked: () -> Unit,
 ) {
     Card(
@@ -56,14 +61,15 @@ internal fun FeedCard(
         ) {
             //TODO Вставить релевантные значение из вне
             FeedCardHeader(
-                title = "Текст новости",
-                imageSrc = " "
+                title = news.title,
+                imageSrc = news.socialImage
             )
 
             Spacer(Modifier.height(14.dp))
 
             FeedCardBottom(
-                dateTime = "10:30 10.10.2023"
+                commentCount = news.commentCount,
+                dateTime = news.postedTime
             )
         }
     }
@@ -79,13 +85,19 @@ private fun FeedCardHeader(
             .fillMaxWidth(),
         verticalAlignment = Alignment.Top,
     ) {
-        Image(
+        SubcomposeAsyncImage(
             modifier = Modifier
                 .size(80.dp)
                 .clip(ShapeDefaults.Small),
-            painter = painterResource(R.drawable.test_image_post),
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(imageSrc)
+                .crossfade(true)
+                .build(),
+            loading = {
+                LoadingIndicator()
+            },
             contentDescription = title,
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.Crop,
         )
 
         Spacer(Modifier.width(14.dp))
@@ -105,6 +117,7 @@ private fun FeedCardHeader(
 
 @Composable
 private fun FeedCardBottom(
+    commentCount: String,
     dateTime: String,
 ) {
     Row(
@@ -121,7 +134,7 @@ private fun FeedCardBottom(
         Text(
             modifier = Modifier
                 .padding(horizontal = 4.dp),
-            text = "33",
+            text = commentCount,
             fontSize = 14.sp,
             color = SportsTheme.colors.secondaryText,
             fontFamily = FontFamily.SansSerif,
