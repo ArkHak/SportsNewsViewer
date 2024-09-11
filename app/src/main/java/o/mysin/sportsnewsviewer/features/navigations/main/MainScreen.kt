@@ -1,7 +1,6 @@
 package o.mysin.sportsnewsviewer.features.navigations.main
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
@@ -24,6 +23,7 @@ import o.mysin.sportsnewsviewer.R
 import o.mysin.sportsnewsviewer.features.favorite.ui.FavoriteScreen
 import o.mysin.sportsnewsviewer.features.navigations.LocalNavHost
 import o.mysin.sportsnewsviewer.features.feeds.ui.FeedsScreen
+import o.mysin.sportsnewsviewer.features.navigations.AppScreens
 import o.mysin.sportsnewsviewer.features.settings.ui.SettingsScreen
 import o.mysin.sportsnewsviewer.ui.theme.SportsTheme
 
@@ -106,11 +106,17 @@ fun MainScreen() {
             navController = navController,
             modifier = Modifier
                 .padding(innerPadding)
-                .fillMaxHeight(),
+                .fillMaxSize(),
             startDestination = startDestinationScreen
         ) {
-            composable<MainScreens.Feeds> { FeedsScreen() }
-            composable<MainScreens.Favorite> { FavoriteScreen() }
+            composable<MainScreens.Feeds> {
+                FeedsScreen(
+                    feedClick = { outerNavController.navigate(AppScreens.Detail) }
+                )
+            }
+            composable<MainScreens.Favorite> { FavoriteScreen(
+                feedClick = { outerNavController.navigate(AppScreens.Detail) }
+            ) }
             composable<MainScreens.Settings> { SettingsScreen() }
         }
     }
