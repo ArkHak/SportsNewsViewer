@@ -103,6 +103,7 @@ internal fun DetailsFeedView(
             FeedBottom(
                 description = viewState.newsDetails.description,
                 dateTime = viewState.newsDetails.postedTime,
+                commentCount = viewState.newsDetails.commentCount
             )
 
         }
@@ -161,6 +162,7 @@ private fun FeedHeader(
 private fun FeedBottom(
     description: String,
     dateTime: String,
+    commentCount: String,
 ) {
     Column(
         modifier = Modifier
@@ -189,7 +191,7 @@ private fun FeedBottom(
             Text(
                 modifier = Modifier
                     .padding(horizontal = 4.dp),
-                text = "33",
+                text = commentCount,
                 fontSize = 14.sp,
                 color = SportsTheme.colors.secondaryText,
                 fontFamily = FontFamily.SansSerif,
