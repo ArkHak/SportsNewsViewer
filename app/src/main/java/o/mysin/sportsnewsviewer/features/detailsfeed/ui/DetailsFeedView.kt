@@ -29,12 +29,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import o.mysin.sportsnewsviewer.R
+import o.mysin.sportsnewsviewer.features.detailsfeed.presentation.models.DetailsFeedEvent
+import o.mysin.sportsnewsviewer.features.favorite.presentation.models.FavoriteEvent
 import o.mysin.sportsnewsviewer.ui.theme.SportsTheme
 
 @Composable
 internal fun DetailsFeedView(
 //    viewState: NewsViewState,
-//    eventHandler: (FeedsEvent) -> Unit,
+    eventHandler: (DetailsFeedEvent) -> Unit,
 ) {
 
     //TODO ДОбавить разные иконки на добавление/удаление из списков
@@ -53,7 +55,7 @@ internal fun DetailsFeedView(
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = { }) {
+                    IconButton(onClick = { eventHandler.invoke(DetailsFeedEvent.ArrowBackPressed) }) {
                         Icon(
                             painter = painterResource(R.drawable.ic_back),
                             contentDescription = "Вернуться на главный экран",

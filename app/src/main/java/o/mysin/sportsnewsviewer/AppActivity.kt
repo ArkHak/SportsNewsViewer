@@ -45,7 +45,9 @@ class AppActivity : ComponentActivity() {
                                 MainScreen()
                             }
                             composable<AppScreens.Detail> {
-                                DetailsFeedScreen()
+                                DetailsFeedScreen() {
+                                    navController.popBackStack()
+                                }
                             }
                         }
                     }
