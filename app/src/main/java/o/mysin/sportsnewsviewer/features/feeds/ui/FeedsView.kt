@@ -7,11 +7,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import o.mysin.sportsnewsviewer.features.feeds.presentation.models.FeedsEvent
+import o.mysin.sportsnewsviewer.features.feeds.presentation.models.FeedsViewState
 import o.mysin.sportsnewsviewer.features.feeds.ui.views.FeedCard
 
 @Composable
 internal fun FeedsView(
-//    viewState: NewsViewState,
+    viewState: FeedsViewState,
     eventHandler: (FeedsEvent) -> Unit,
 ) {
 

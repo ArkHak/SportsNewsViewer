@@ -1,12 +1,25 @@
 package o.mysin.sportsnewsviewer.features.feeds.presentation.usecase
 
 import o.mysin.sportsnewsviewer.data.NewsRepository
+import o.mysin.sportsnewsviewer.data.NewsResponse
+import o.mysin.sportsnewsviewer.data.utils.Either
+import o.mysin.sportsnewsviewer.data.utils.HttpError
 
-class GetNewsUseCase(
+internal class GetNewsUseCase(
     private val repository: NewsRepository,
 ) {
-    suspend operator fun invoke() = repository.getNews()
+    suspend operator fun invoke(): Either<HttpError, NewsResponse> = repository.getNews()
 }
+
+//internal class GetAllArticlesUseCase @Inject constructor(
+//    private val repository: ArticlesRepository
+//) {
+//    operator fun invoke(query: String): Flow<RequestResult<List<ArticleUI>>> {
+//        return repository.getAll(query).map { requestResult ->
+//            requestResult.map { articles -> articles.map { it.toUiArticle() } }
+//        }
+//    }
+//}
 
 //class BookTripUseCase(
 //    private val repository: HomePassengerRepository,

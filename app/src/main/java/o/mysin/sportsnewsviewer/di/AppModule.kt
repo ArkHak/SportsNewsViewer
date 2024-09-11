@@ -4,6 +4,7 @@ import o.mysin.sportsnewsviewer.data.NewsRepository
 import o.mysin.sportsnewsviewer.data.NewsRepositoryImpl
 import o.mysin.sportsnewsviewer.features.feeds.presentation.FeedsViewModel
 import o.mysin.sportsnewsviewer.features.feeds.presentation.usecase.GetNewsUseCase
+import o.mysin.sportsnewsviewer.network.NetworkApi
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
@@ -17,4 +18,7 @@ val appModule = module {
     viewModelOf(::FeedsViewModel)
 
     singleOf(::GetNewsUseCase)
+
+    //Network
+    single { NetworkApi.create() }
 }
