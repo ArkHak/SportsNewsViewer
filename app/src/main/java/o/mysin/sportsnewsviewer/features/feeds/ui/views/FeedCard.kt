@@ -96,6 +96,9 @@ private fun FeedCardHeader(
             loading = {
                 LoadingIndicator()
             },
+            error = {
+                painterResource(R.drawable.not_found)
+            },
             contentDescription = title,
             contentScale = ContentScale.Crop,
         )
