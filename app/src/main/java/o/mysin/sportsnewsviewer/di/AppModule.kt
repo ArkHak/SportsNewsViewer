@@ -2,6 +2,7 @@ package o.mysin.sportsnewsviewer.di
 
 import o.mysin.sportsnewsviewer.data.NewsRepository
 import o.mysin.sportsnewsviewer.data.NewsRepositoryImpl
+import o.mysin.sportsnewsviewer.data.mappers.MapNewsItemDTOToNewsItemUI
 import o.mysin.sportsnewsviewer.features.feeds.presentation.FeedsViewModel
 import o.mysin.sportsnewsviewer.features.feeds.presentation.usecase.GetNewsUseCase
 import o.mysin.sportsnewsviewer.network.NetworkApi
@@ -18,6 +19,8 @@ val appModule = module {
     viewModelOf(::FeedsViewModel)
 
     singleOf(::GetNewsUseCase)
+
+    singleOf(::MapNewsItemDTOToNewsItemUI)
 
     //Network
     single { NetworkApi.create() }

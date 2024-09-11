@@ -3,6 +3,7 @@ package o.mysin.sportsnewsviewer.features.feeds.presentation
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import o.mysin.sportsnewsviewer.base.BaseViewModel
+import o.mysin.sportsnewsviewer.data.mappers.MapNewsItemDTOToNewsItemUI
 import o.mysin.sportsnewsviewer.data.utils.Either
 import o.mysin.sportsnewsviewer.features.feeds.presentation.models.FeedsAction
 import o.mysin.sportsnewsviewer.features.feeds.presentation.models.FeedsEvent
@@ -12,6 +13,7 @@ import o.mysin.sportsnewsviewer.features.feeds.presentation.usecase.GetNewsUseCa
 
 internal class FeedsViewModel(
     private val getNewsUseCase: GetNewsUseCase,
+    private val toNewsItemUI: MapNewsItemDTOToNewsItemUI,
 ) :
     BaseViewModel<FeedsViewState, FeedsAction, FeedsEvent>(initialState = FeedsViewState()) {
 
@@ -22,13 +24,17 @@ internal class FeedsViewModel(
         }
     }
 
+    //val userUI = toUserUI.transform(userNetwork)
+
     private fun loadingNews() {
         viewState = viewState.copy(isStatus = StatusScreen.LOADING)
         viewModelScope.launch {
             when (val eitherResponse = getNewsUseCase.invoke()) {
                 is Either.Success -> {
                     viewState = viewState.copy(
-                        newsList = eitherResponse.value.listNews,
+                        newsList = eitherResponse.value.listNews.map { newsItemDTO ->
+                            toNewsItemUI.transform(newsItemDTO)
+                        },
                         isStatus = StatusScreen.SUCCESS
                     )
                 }

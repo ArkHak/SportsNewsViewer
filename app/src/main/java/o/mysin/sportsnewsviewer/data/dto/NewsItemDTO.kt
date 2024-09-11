@@ -1,11 +1,11 @@
-package o.mysin.sportsnewsviewer.data
+package o.mysin.sportsnewsviewer.data.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class NewsItem(
+data class NewsItemDTO(
     @SerialName("title") val title: String,
     @SerialName("comment_count") val commentCount: String,
     @SerialName("social_image") val socialImage: String,

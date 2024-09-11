@@ -31,13 +31,13 @@ import androidx.compose.ui.unit.sp
 import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
 import o.mysin.sportsnewsviewer.R
-import o.mysin.sportsnewsviewer.data.NewsItem
+import o.mysin.sportsnewsviewer.data.model.NewsItemUI
 import o.mysin.sportsnewsviewer.ui.common.LoadingIndicator
 import o.mysin.sportsnewsviewer.ui.theme.SportsTheme
 
 @Composable
 internal fun FeedCard(
-    news: NewsItem,
+    news: NewsItemUI,
     feedClicked: () -> Unit,
 ) {
     Card(
