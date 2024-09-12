@@ -1,8 +1,5 @@
 package o.mysin.sportsnewsviewer.database.di
 
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import o.mysin.sportsnewsviewer.database.FavoriteNewsDao
 import o.mysin.sportsnewsviewer.database.SportNewsDatabase
 import o.mysin.sportsnewsviewer.database.mapper.FavoriteNewsEntityMapper
@@ -14,11 +11,7 @@ import org.koin.dsl.module
 val databaseModule = module {
 
     single<FavoriteNewsDao> {
-        SportNewsDatabase.getDatabase(get(), get(), get()).favoriteNewsDao()
-    }
-
-    single {
-        CoroutineScope(Dispatchers.IO + Job())
+        SportNewsDatabase.getDatabase(get()).favoriteNewsDao()
     }
 
     singleOf(::FavoriteNewsEntityMapperImpl) {
