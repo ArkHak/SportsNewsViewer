@@ -9,10 +9,12 @@ import o.mysin.sportsnewsviewer.features.detailsfeed.presentation.models.Details
 import o.mysin.sportsnewsviewer.features.detailsfeed.presentation.models.DetailsFeedEvent
 import o.mysin.sportsnewsviewer.features.detailsfeed.presentation.models.DetailsFeedViewState
 import o.mysin.sportsnewsviewer.features.detailsfeed.presentation.usecase.GetNewsByIdUseCase
+import o.mysin.sportsnewsviewer.features.detailsfeed.presentation.usecase.SaveNewsDatabaseUseCase
 import o.mysin.sportsnewsviewer.features.feeds.presentation.models.StatusScreen
 
 internal class DetailsFeedViewModel(
     private val getNewsByIdUseCase: GetNewsByIdUseCase,
+    private val saveNewsDatabaseUseCase: SaveNewsDatabaseUseCase,
     private val toNewsDetailUI: MapNewsDetailsDTOToNewsDetailsUI,
 ) :
     BaseViewModel<DetailsFeedViewState, DetailsFeedAction, DetailsFeedEvent>(initialState = DetailsFeedViewState()) {
@@ -22,7 +24,15 @@ internal class DetailsFeedViewModel(
             is DetailsFeedEvent.LoadingData -> {
                 loadingFeed(viewEvent.feedId)
             }
+
+            DetailsFeedEvent.FavoriteIconPressed -> {
+                saveFavoriteNewsDatabase()
+            }
         }
+    }
+
+    private fun arrowBackPressed() {
+        viewAction = DetailsFeedAction.BackMainScreen
     }
 
     private fun loadingFeed(feedId: Int) {
@@ -43,8 +53,11 @@ internal class DetailsFeedViewModel(
         }
     }
 
-    private fun arrowBackPressed() {
-        viewAction = DetailsFeedAction.BackMainScreen
+    private fun saveFavoriteNewsDatabase() {
+        val news = viewState.newsDetails
+        viewModelScope.launch {
+            saveNewsDatabaseUseCase.invoke(news)
+        }
     }
 
 }

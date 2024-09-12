@@ -69,7 +69,7 @@ internal fun DetailsFeedView(
                 },
                 backgroundColor = SportsTheme.colors.primaryBackground,
                 actions = {
-                    IconButton(onClick = { }) {
+                    IconButton(onClick = {eventHandler.invoke(DetailsFeedEvent.FavoriteIconPressed)}) {
                         Icon(
                             painter = painterResource(R.drawable.ic_add_favorite),
                             contentDescription = stringResource(R.string.cont_des_favorite_icon),

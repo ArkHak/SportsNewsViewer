@@ -9,8 +9,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import o.mysin.sportsnewsviewer.data.dto.NewsDetailsDTO
 import o.mysin.sportsnewsviewer.data.dto.NewsListResponseDTO
+import o.mysin.sportsnewsviewer.data.model.NewsDetailsUI
 import o.mysin.sportsnewsviewer.data.utils.Either
 import o.mysin.sportsnewsviewer.data.utils.HttpError
+import o.mysin.sportsnewsviewer.database.FavoriteNewsDao
+import o.mysin.sportsnewsviewer.database.mapper.FavoriteNewsEntityMapper
 import o.mysin.sportsnewsviewer.network.NetworkConstant.ENDPOINT_GET_DETAILS_FEED
 import o.mysin.sportsnewsviewer.network.NetworkConstant.ENDPOINT_GET_NEWS_LIST
 import o.mysin.sportsnewsviewer.network.NetworkConstant.ERROR_REQUEST
@@ -23,6 +26,8 @@ import o.mysin.sportsnewsviewer.network.NetworkConstant.PAR_FROM
 
 internal class NewsRepositoryImpl(
     private val ktorApi: HttpClient,
+    private val favoriteNewsDao: FavoriteNewsDao,
+    private val favoriteNewsEntityMapper: FavoriteNewsEntityMapper,
 ) : NewsRepository {
 
     override suspend fun getNewsList(): Either<HttpError, NewsListResponseDTO> =
@@ -58,4 +63,12 @@ internal class NewsRepositoryImpl(
                 Either.fail(HttpError.NetworkError())
             }
         }
+
+    override suspend fun saveFavoriteNews(favoriteNews: NewsDetailsUI) {
+        favoriteNewsDao.insertFavoriteNews(
+            favoriteNewsEntityMapper.toFavoriteNewsEntity(
+                favoriteNews
+            )
+        )
+    }
 }

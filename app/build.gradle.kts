@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.kotlin.ksp)
 }
 
 android {
@@ -68,7 +69,15 @@ dependencies {
     implementation(libs.ktor.engine.cio)
     implementation(libs.ktor.serialization.json)
 
+    //Room
+    implementation(libs.room.runtime)
+    ksp(libs.room.compiler)
+    implementation(libs.room.ktx)
+
     //Coil
     implementation(libs.compose.coil)
+
+    //Room
+
 
 }

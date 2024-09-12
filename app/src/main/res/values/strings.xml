@@ -19,5 +19,6 @@
 
     <!-- Common -->
     <string name="comment_for_feed">Комменарии к посту</string>
+    <string name="name_database">sports_news_database</string>
 
 </resources>

@@ -18,6 +18,8 @@
 - Coil
 - Ktor-client
 - Jetpack Navigation - TypeSafe;
+- KSP
+- Room
 
 ### Особенности:
 - рефреш списка с новостями при протягивании сверху вниз;
