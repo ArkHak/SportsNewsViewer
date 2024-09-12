@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Details News Screen -->
+    <dimen name="dfv_font_size_header_top_app_bar">16sp</dimen>
+    <dimen name="dfv_elevation_top_app_bar">4dp</dimen>
+    <dimen name="dfv_height_image">196dp</dimen>
+
+    <!-- Feed Card -->
+    <dimen name="fc_height_image">80dp</dimen>
+
+    <!-- Common padding-->
+    <dimen name="extra_small_padding">4dp</dimen>
+    <dimen name="small_padding_space">6dp</dimen>
+    <dimen name="normal_padding_space">8dp</dimen>
+    <dimen name="normal_large_padding_space">14dp</dimen>
+    <dimen name="large_padding_space">16dp</dimen>
+    <dimen name="extra_large_padding_space">24dp</dimen>
+
+    <!-- Common spacer-->
+    <dimen name="small_size_horizontal_spacer">8dp</dimen>
+    <dimen name="small_large_size_horizontal_spacer">12dp</dimen>
+    <dimen name="normal_size_horizontal_spacer">14dp</dimen>
+
+    <!-- Loading Indicator-->
+    <dimen name="size_loading_indicator">64dp</dimen>
+
+
+</resources>

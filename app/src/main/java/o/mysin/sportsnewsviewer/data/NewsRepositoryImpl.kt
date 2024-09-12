@@ -1,5 +1,6 @@
 package o.mysin.sportsnewsviewer.data
 
+import android.util.Log
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
@@ -10,25 +11,34 @@ import o.mysin.sportsnewsviewer.data.dto.NewsDetailsDTO
 import o.mysin.sportsnewsviewer.data.dto.NewsListResponseDTO
 import o.mysin.sportsnewsviewer.data.utils.Either
 import o.mysin.sportsnewsviewer.data.utils.HttpError
+import o.mysin.sportsnewsviewer.network.NetworkConstant.ENDPOINT_GET_DETAILS_FEED
+import o.mysin.sportsnewsviewer.network.NetworkConstant.ENDPOINT_GET_NEWS_LIST
+import o.mysin.sportsnewsviewer.network.NetworkConstant.ERROR_REQUEST
+import o.mysin.sportsnewsviewer.network.NetworkConstant.MESSAGE_LOG_HEADER_ERROR_GET_NEWS_BY_ID
+import o.mysin.sportsnewsviewer.network.NetworkConstant.MESSAGE_LOG_HEADER_ERROR_GET_NEWS_LIST
+import o.mysin.sportsnewsviewer.network.NetworkConstant.PAR_CATEGORY_ID
+import o.mysin.sportsnewsviewer.network.NetworkConstant.PAR_COUNT
+import o.mysin.sportsnewsviewer.network.NetworkConstant.PAR_FEED_ID
+import o.mysin.sportsnewsviewer.network.NetworkConstant.PAR_FROM
 
 internal class NewsRepositoryImpl(
     private val ktorApi: HttpClient,
 ) : NewsRepository {
 
-    //TODO Добавить Логер Ошибок
     override suspend fun getNewsList(): Either<HttpError, NewsListResponseDTO> =
         withContext(Dispatchers.IO) {
             return@withContext try {
                 val response =
-                    ktorApi.get("https://www.sports.ru/stat/export/iphone/news.json") {
+                    ktorApi.get(ENDPOINT_GET_NEWS_LIST) {
                         url {
-                            parameters.append("category_id", "208")
-                            parameters.append("from", "0")
-                            parameters.append("count", "10")
+                            parameters.append(PAR_CATEGORY_ID, "208")
+                            parameters.append(PAR_FROM, "0")
+                            parameters.append(PAR_COUNT, "10")
                         }
                     }
                 Either.success(response.body())
             } catch (e: IOException) {
+                Log.d(ERROR_REQUEST, "$MESSAGE_LOG_HEADER_ERROR_GET_NEWS_LIST ${e.message}")
                 Either.fail(HttpError.NetworkError())
             }
         }
@@ -37,13 +47,14 @@ internal class NewsRepositoryImpl(
         withContext(Dispatchers.IO) {
             return@withContext try {
                 val response =
-                    ktorApi.get("https://www.sports.ru/stat/export/iphone/news_item.json") {
+                    ktorApi.get(ENDPOINT_GET_DETAILS_FEED) {
                         url {
-                            parameters.append("id", feedId.toString())
+                            parameters.append(PAR_FEED_ID, feedId.toString())
                         }
                     }
                 Either.success(response.body())
             } catch (e: IOException) {
+                Log.d(ERROR_REQUEST, "$MESSAGE_LOG_HEADER_ERROR_GET_NEWS_BY_ID ${e.message}")
                 Either.fail(HttpError.NetworkError())
             }
         }

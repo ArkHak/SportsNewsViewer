@@ -21,10 +21,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import o.mysin.sportsnewsviewer.R
 import o.mysin.sportsnewsviewer.ui.theme.SportsTheme
@@ -37,7 +38,10 @@ internal fun SettingsView(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 12.dp, vertical = 24.dp)
+            .padding(
+                horizontal = dimensionResource(R.dimen.normal_large_padding_space),
+                vertical = dimensionResource(R.dimen.extra_large_padding_space)
+            )
     ) {
         var checkedTheme by remember { mutableStateOf(true) }
 
@@ -46,14 +50,14 @@ internal fun SettingsView(
         ) {
             Icon(
                 painter = painterResource(R.drawable.ic_theme),
-                contentDescription = "Switcher Theme",
+                contentDescription = stringResource(R.string.cont_des_switcher_theme),
                 tint = SportsTheme.colors.secondaryText
             )
 
-            Spacer(modifier = Modifier.width(12.dp))
+            Spacer(modifier = Modifier.width(dimensionResource(R.dimen.small_large_size_horizontal_spacer)))
 
             Text(
-                text = "Темная тема",
+                text = stringResource(R.string.dark_theme_button),
                 fontSize = 18.sp,
                 color = SportsTheme.colors.primaryText,
                 fontFamily = FontFamily.SansSerif,
@@ -79,21 +83,21 @@ internal fun SettingsView(
 
         }
 
-        Spacer(Modifier.height(8.dp))
+        Spacer(Modifier.height(dimensionResource(R.dimen.small_size_horizontal_spacer)))
 
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
                 painter = painterResource(R.drawable.ic_clear),
-                contentDescription = "Switcher Theme",
+                contentDescription = stringResource(R.string.cont_des_clean_favorite_data),
                 tint = SportsTheme.colors.secondaryText
             )
 
-            Spacer(modifier = Modifier.width(12.dp))
+            Spacer(modifier = Modifier.width(dimensionResource(R.dimen.small_large_size_horizontal_spacer)))
 
             Text(
-                text = "Очистить избранное",
+                text = stringResource(R.string.clear_favorite_data),
                 fontSize = 18.sp,
                 color = SportsTheme.colors.primaryText,
                 fontFamily = FontFamily.SansSerif,
@@ -113,7 +117,7 @@ internal fun SettingsView(
             ) {
 
                 Text(
-                    text = "Clear",
+                    text = stringResource(R.string.button_name_clear),
                 )
             }
         }

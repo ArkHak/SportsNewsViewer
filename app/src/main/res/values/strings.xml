@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">SportsNewsViewer</string>
+
+    <!-- Errors -->
+    <string name="error_network">Ошибка сети</string>
+
+    <!-- Details News Screen -->
+    <string name="details_feed_news_header">Новость</string>
+    <string name="cont_des_arrow_back">Вернуться на главный экран</string>
+    <string name="cont_des_favorite_icon">Добавить в избранное</string>
+
+    <!-- Settings_screen -->
+    <string name="cont_des_switcher_theme">Переключатель темы</string>
+    <string name="cont_des_clean_favorite_data">Clear</string>
+    <string name="dark_theme_button">Темная тема</string>
+    <string name="clear_favorite_data">Очистить избранное</string>
+    <string name="button_name_clear">Clear</string>
+
+
+    <!-- Common -->
+    <string name="comment_for_feed">Комменарии к посту</string>
+
 </resources>

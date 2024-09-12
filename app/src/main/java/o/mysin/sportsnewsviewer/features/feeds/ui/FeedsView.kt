@@ -13,7 +13,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.dimensionResource
+import o.mysin.sportsnewsviewer.R
 import o.mysin.sportsnewsviewer.features.feeds.presentation.models.FeedsEvent
 import o.mysin.sportsnewsviewer.features.feeds.presentation.models.FeedsViewState
 import o.mysin.sportsnewsviewer.features.feeds.ui.views.FeedCard
@@ -41,7 +42,7 @@ internal fun FeedsView(
     Box(
         Modifier
             .fillMaxSize()
-            .padding(6.dp)
+            .padding(dimensionResource(R.dimen.small_padding_space))
     ) {
         LazyColumn(
             modifier = Modifier

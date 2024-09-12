@@ -38,7 +38,7 @@ private sealed class MainScreens {
     data object Settings : MainScreens()
 }
 
-
+//TODO строки
 private enum class BottomTabs(
     val title: String,
     val icon: Int,

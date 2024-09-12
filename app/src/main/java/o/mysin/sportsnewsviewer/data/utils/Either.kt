@@ -1,6 +1,6 @@
 package o.mysin.sportsnewsviewer.data.utils
 
-sealed class Either<out F, out S> {
+internal sealed class Either<out F, out S> {
 
     data class Fail<out F> internal constructor(val value: F) : Either<F, Nothing>() {
         companion object {
