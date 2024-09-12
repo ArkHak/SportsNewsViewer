@@ -1,6 +1,8 @@
 package o.mysin.sportsnewsviewer.features.detailsfeed.ui
 
+import android.util.Log
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import o.mysin.sportsnewsviewer.features.detailsfeed.presentation.DetailsFeedViewModel
@@ -18,6 +20,7 @@ internal fun DetailsFeedScreen(
 ) {
     val viewState by detailsFeedViewModel.viewStates().collectAsState()
     val viewAction by detailsFeedViewModel.viewActions().collectAsState(null)
+
 
     when (viewState.isStatus) {
         StatusScreen.NULL -> {
@@ -38,6 +41,7 @@ internal fun DetailsFeedScreen(
 
         StatusScreen.ERROR -> TODO()
     }
+
 
     when (viewAction) {
         DetailsFeedAction.BackMainScreen -> {

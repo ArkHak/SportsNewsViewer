@@ -8,13 +8,15 @@ import o.mysin.sportsnewsviewer.data.utils.Either
 import o.mysin.sportsnewsviewer.features.detailsfeed.presentation.models.DetailsFeedAction
 import o.mysin.sportsnewsviewer.features.detailsfeed.presentation.models.DetailsFeedEvent
 import o.mysin.sportsnewsviewer.features.detailsfeed.presentation.models.DetailsFeedViewState
+import o.mysin.sportsnewsviewer.features.detailsfeed.presentation.usecase.CheckExistsNewsDatabaseUseCase
 import o.mysin.sportsnewsviewer.features.detailsfeed.presentation.usecase.GetNewsByIdUseCase
-import o.mysin.sportsnewsviewer.features.detailsfeed.presentation.usecase.SaveNewsDatabaseUseCase
+import o.mysin.sportsnewsviewer.features.detailsfeed.presentation.usecase.ChangeExistsNewsDatabaseUseCase
 import o.mysin.sportsnewsviewer.features.feeds.presentation.models.StatusScreen
 
 internal class DetailsFeedViewModel(
     private val getNewsByIdUseCase: GetNewsByIdUseCase,
-    private val saveNewsDatabaseUseCase: SaveNewsDatabaseUseCase,
+    private val changeExistsNewsDatabaseUseCase: ChangeExistsNewsDatabaseUseCase,
+    private val checkExistsNewsDatabaseUseCase: CheckExistsNewsDatabaseUseCase,
     private val toNewsDetailUI: MapNewsDetailsDTOToNewsDetailsUI,
 ) :
     BaseViewModel<DetailsFeedViewState, DetailsFeedAction, DetailsFeedEvent>(initialState = DetailsFeedViewState()) {
@@ -26,7 +28,7 @@ internal class DetailsFeedViewModel(
             }
 
             DetailsFeedEvent.FavoriteIconPressed -> {
-                saveFavoriteNewsDatabase()
+                changeExistsFavoriteNewsDatabase()
             }
         }
     }
@@ -40,8 +42,10 @@ internal class DetailsFeedViewModel(
         viewModelScope.launch {
             when (val eitherResponse = getNewsByIdUseCase.invoke(feedId)) {
                 is Either.Success -> {
+                    val exists = checkExistsNewsDatabaseUseCase.invoke(eitherResponse.value.id)
                     viewState = viewState.copy(
                         newsDetails = toNewsDetailUI.transform(eitherResponse.value),
+                        isNewsFavorite = exists,
                         isStatus = StatusScreen.SUCCESS
                     )
                 }
@@ -53,10 +57,19 @@ internal class DetailsFeedViewModel(
         }
     }
 
-    private fun saveFavoriteNewsDatabase() {
+    private fun changeExistsFavoriteNewsDatabase() {
         val news = viewState.newsDetails
         viewModelScope.launch {
-            saveNewsDatabaseUseCase.invoke(news)
+            changeExistsNewsDatabaseUseCase.invoke(news)
+            updateExistFavoriteNewsDatabase()
+        }
+    }
+
+    private fun updateExistFavoriteNewsDatabase() {
+        viewModelScope.launch {
+            val newsId = viewState.newsDetails.id
+            viewState =
+                viewState.copy(isNewsFavorite = checkExistsNewsDatabaseUseCase.invoke(newsId))
         }
     }
 

@@ -20,4 +20,7 @@ interface FavoriteNewsDao {
     @Query("DELETE FROM favorite_news")
     suspend fun deleteAllFavoriteNews()
 
+    @Query("SELECT EXISTS(SELECT * FROM favorite_news WHERE news_id = :newsId)")
+    suspend fun checkNewsFavoriteExists(newsId: Int): Boolean
+
 }

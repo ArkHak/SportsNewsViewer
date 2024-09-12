@@ -14,7 +14,7 @@ class MapNewsDetailsDTOToNewsDetailsUI : Mapper<NewsDetailsDTO, NewsDetailsUI> {
             commentCount = data.commentCount,
             socialImage = data.socialImage,
             postedTime = FormatterDate.formatDate(data.postedTime),
-            description = clearHtml(data.description)
+            description = clearHtml(data.description),
         )
     }
 }
