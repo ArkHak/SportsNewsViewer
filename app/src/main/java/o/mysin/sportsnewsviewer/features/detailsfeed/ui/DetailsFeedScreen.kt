@@ -1,8 +1,6 @@
 package o.mysin.sportsnewsviewer.features.detailsfeed.ui
 
-import android.util.Log
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import o.mysin.sportsnewsviewer.features.detailsfeed.presentation.DetailsFeedViewModel
