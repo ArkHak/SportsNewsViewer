@@ -19,7 +19,7 @@ data class NewsDetailsUI(
                 commentCount = "-1",
                 socialImage = "",
                 postedTime = "-1",
-                description = ""
+                description = "",
             )
         }
     }

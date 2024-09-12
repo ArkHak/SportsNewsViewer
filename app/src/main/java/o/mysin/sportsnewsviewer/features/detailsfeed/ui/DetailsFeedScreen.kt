@@ -19,6 +19,7 @@ internal fun DetailsFeedScreen(
     val viewState by detailsFeedViewModel.viewStates().collectAsState()
     val viewAction by detailsFeedViewModel.viewActions().collectAsState(null)
 
+
     when (viewState.isStatus) {
         StatusScreen.NULL -> {
             detailsFeedViewModel.obtainEvent(DetailsFeedEvent.LoadingData(feedId))
@@ -38,6 +39,7 @@ internal fun DetailsFeedScreen(
 
         StatusScreen.ERROR -> TODO()
     }
+
 
     when (viewAction) {
         DetailsFeedAction.BackMainScreen -> {

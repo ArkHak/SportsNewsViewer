@@ -23,10 +23,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
@@ -42,14 +43,13 @@ internal fun DetailsFeedView(
     eventHandler: (DetailsFeedEvent) -> Unit,
 ) {
 
-    //TODO ДОбавить разные иконки на добавление/удаление из списков
     Scaffold(
         topBar = {
             TopAppBar(
                 modifier = Modifier,
                 title = {
                     Text(
-                        text = "Новость",
+                        text = stringResource(R.string.details_feed_news_header),
                         fontSize = 16.sp,
                         color = SportsTheme.colors.primaryText,
                         fontFamily = FontFamily.SansSerif,
@@ -61,22 +61,22 @@ internal fun DetailsFeedView(
                     IconButton(onClick = { eventHandler.invoke(DetailsFeedEvent.ArrowBackPressed) }) {
                         Icon(
                             painter = painterResource(R.drawable.ic_back),
-                            contentDescription = "Вернуться на главный экран",
+                            contentDescription = stringResource(R.string.cont_des_arrow_back),
                             tint = SportsTheme.colors.secondaryText
                         )
                     }
                 },
                 backgroundColor = SportsTheme.colors.primaryBackground,
                 actions = {
-                    IconButton(onClick = { }) {
+                    IconButton(onClick = { eventHandler.invoke(DetailsFeedEvent.FavoriteIconPressed) }) {
                         Icon(
-                            painter = painterResource(R.drawable.ic_add_favorite),
-                            contentDescription = "Добавить в избранное",
+                            painter = painterResource(if (viewState.isNewsFavorite) R.drawable.ic_remove_favorite else R.drawable.ic_add_favorite),
+                            contentDescription = stringResource(R.string.cont_des_favorite_icon),
                             tint = SportsTheme.colors.accentColor
                         )
                     }
                 },
-                elevation = 4.dp
+                elevation = dimensionResource(R.dimen.dfv_elevation_top_app_bar)
             )
         }
     ) { innerPadding ->
@@ -87,7 +87,7 @@ internal fun DetailsFeedView(
                 .verticalScroll(scrollState)
                 .fillMaxSize()
                 .padding(innerPadding)
-                .padding(16.dp)
+                .padding(dimensionResource(R.dimen.large_padding_space))
         ) {
             FeedHeader(
                 title = viewState.newsDetails.title,
@@ -96,7 +96,7 @@ internal fun DetailsFeedView(
 
             Divider(
                 modifier = Modifier
-                    .padding(vertical = 6.dp),
+                    .padding(vertical = dimensionResource(R.dimen.small_padding_space)),
                 color = SportsTheme.colors.accentColor
             )
 
@@ -128,7 +128,7 @@ private fun FeedHeader(
         ) {
             SubcomposeAsyncImage(
                 modifier = Modifier
-                    .height(196.dp)
+                    .height(dimensionResource(R.dimen.dfv_height_image))
                     .clip(ShapeDefaults.ExtraSmall),
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(imageSrc)
@@ -146,7 +146,7 @@ private fun FeedHeader(
 
         }
 
-        Spacer(Modifier.height(8.dp))
+        Spacer(Modifier.height(dimensionResource(R.dimen.small_size_horizontal_spacer)))
 
         Text(
             text = title,
@@ -175,7 +175,7 @@ private fun FeedBottom(
             fontFamily = FontFamily.SansSerif,
         )
 
-        Spacer(Modifier.height(8.dp))
+        Spacer(Modifier.height(dimensionResource(R.dimen.normal_padding_space)))
 
         Row(
             modifier = Modifier
@@ -190,7 +190,7 @@ private fun FeedBottom(
 
             Text(
                 modifier = Modifier
-                    .padding(horizontal = 4.dp),
+                    .padding(horizontal = dimensionResource(R.dimen.extra_small_padding)),
                 text = commentCount,
                 fontSize = 14.sp,
                 color = SportsTheme.colors.secondaryText,

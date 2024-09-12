@@ -1,9 +1,13 @@
 package o.mysin.sportsnewsviewer.data.utils
 
+import androidx.annotation.StringRes
+import o.mysin.sportsnewsviewer.R
+
 sealed interface HttpError {
 
     data class NetworkError(
-        val errorMessage: String = "Ошибка сети",
+        @StringRes
+        val errorMessage: Int = R.string.error_network,
     ) : HttpError
 
 }

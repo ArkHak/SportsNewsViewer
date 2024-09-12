@@ -22,7 +22,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -42,7 +44,7 @@ internal fun FeedCard(
 ) {
     Card(
         modifier = Modifier
-            .padding(vertical = 4.dp),
+            .padding(vertical = dimensionResource(R.dimen.extra_small_padding)),
         colors = CardColors(
             contentColor = SportsTheme.colors.primaryBackground,
             containerColor = SportsTheme.colors.primaryBackground,
@@ -56,7 +58,7 @@ internal fun FeedCard(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp),
+                .padding(dimensionResource(R.dimen.normal_padding_space)),
             verticalArrangement = Arrangement.Center
         ) {
             FeedCardHeader(
@@ -64,7 +66,7 @@ internal fun FeedCard(
                 imageSrc = news.socialImage
             )
 
-            Spacer(Modifier.height(14.dp))
+            Spacer(Modifier.height(dimensionResource(R.dimen.normal_size_horizontal_spacer)))
 
             FeedCardBottom(
                 commentCount = news.commentCount,
@@ -86,7 +88,7 @@ private fun FeedCardHeader(
     ) {
         SubcomposeAsyncImage(
             modifier = Modifier
-                .size(80.dp)
+                .size(dimensionResource(R.dimen.fc_height_image))
                 .clip(ShapeDefaults.Small),
             model = ImageRequest.Builder(LocalContext.current)
                 .data(imageSrc)
@@ -102,7 +104,7 @@ private fun FeedCardHeader(
             contentScale = ContentScale.Crop,
         )
 
-        Spacer(Modifier.width(14.dp))
+        Spacer(Modifier.width(dimensionResource(R.dimen.normal_size_horizontal_spacer)))
 
         Text(
             text = title,
@@ -129,13 +131,13 @@ private fun FeedCardBottom(
     ) {
         Icon(
             painter = painterResource(R.drawable.ic_comment),
-            contentDescription = "Комменарии к посту",
+            contentDescription = stringResource(R.string.comment_for_feed),
             tint = SportsTheme.colors.secondaryText
         )
 
         Text(
             modifier = Modifier
-                .padding(horizontal = 4.dp),
+                .padding(horizontal = dimensionResource(R.dimen.extra_small_padding)),
             text = commentCount,
             fontSize = 14.sp,
             color = SportsTheme.colors.secondaryText,
