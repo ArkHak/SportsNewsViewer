@@ -1,6 +1,8 @@
 package o.mysin.sportsnewsviewer.features.favorite.ui
 
+import android.util.Log
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import o.mysin.sportsnewsviewer.base.BaseStatusScreen
@@ -17,6 +19,10 @@ internal fun FavoriteScreen(
 ) {
     val viewState by favoriteViewModel.viewStates().collectAsState()
     val viewAction by favoriteViewModel.viewActions().collectAsState(null)
+
+    LaunchedEffect(key1 = Unit) {
+        favoriteViewModel.obtainEvent(FavoriteEvent.UpdateData)
+    }
 
     when (viewState.isStatus) {
         BaseStatusScreen.NULL -> {
@@ -45,7 +51,6 @@ internal fun FavoriteScreen(
             val id = (viewAction as FavoriteAction.OpenDetailFeedScreen).feedId
             feedClick(id)
             favoriteViewModel.clearAction()
-
         }
     }
 }

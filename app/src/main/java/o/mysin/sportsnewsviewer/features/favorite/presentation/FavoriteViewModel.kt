@@ -22,13 +22,16 @@ internal class FavoriteViewModel(
                 feedClicked(viewEvent.feedId)
             }
 
+            FavoriteEvent.UpdateData -> {
+                viewState = viewState.copy(isStatus = BaseStatusScreen.NULL)
+            }
         }
     }
 
     private fun loadingFavoriteNews() {
         viewState = viewState.copy(isStatus = BaseStatusScreen.LOADING)
         viewModelScope.launch {
-            val list = getFavoriteNewsListUseCase.invoke()
+            val list = getFavoriteNewsListUseCase.invoke(viewState.favoriteNewsList)
             viewState = viewState.copy(
                 favoriteNewsList = list,
                 isStatus = BaseStatusScreen.SUCCESS
