@@ -1,6 +1,7 @@
 package o.mysin.sportsnewsviewer
 
 import android.app.Application
+import o.mysin.sportsnewsviewer.data.di.mappersModule
 import o.mysin.sportsnewsviewer.database.di.databaseModule
 import o.mysin.sportsnewsviewer.di.appModule
 import o.mysin.sportsnewsviewer.features.detailsfeed.di.detailsFeedModule
@@ -25,7 +26,8 @@ class SportsApplication : Application() {
                 networkModule,
                 databaseModule,
                 settingsModule,
-                favoriteModule
+                favoriteModule,
+                mappersModule
             )
         }
     }

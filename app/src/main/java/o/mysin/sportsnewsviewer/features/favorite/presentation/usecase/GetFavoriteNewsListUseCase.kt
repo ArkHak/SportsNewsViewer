@@ -3,11 +3,14 @@ package o.mysin.sportsnewsviewer.features.favorite.presentation.usecase
 import o.mysin.sportsnewsviewer.utils.IsEqualsTwoList.isEqualsTwoList
 
 import o.mysin.sportsnewsviewer.data.NewsRepository
+import o.mysin.sportsnewsviewer.data.mappers.dtoToUI.MapNewsDetailsDTOToNewsItemUI
 import o.mysin.sportsnewsviewer.data.model.NewsItemUI
 import o.mysin.sportsnewsviewer.data.utils.Either
+import o.mysin.sportsnewsviewer.data.utils.FormatterDate
 
 internal class GetFavoriteNewsListUseCase(
     private val repository: NewsRepository,
+    private val mapNewsDetailsDTOToNewsItemUI: MapNewsDetailsDTOToNewsItemUI,
 ) {
     suspend operator fun invoke(favoriteNewsList: List<NewsItemUI>): List<NewsItemUI> {
 
@@ -19,20 +22,14 @@ internal class GetFavoriteNewsListUseCase(
         val updateListNewsItemUI = if (!isEqualsTwoList(favoriteListId, favoriteListIdNow)) {
             favoriteNewsListEntity.map { newsEntity ->
                 when (val eitherResponse = repository.getNewsByID(newsEntity.newsId)) {
-                    is Either.Success -> NewsItemUI(
-                        id = eitherResponse.value.id,
-                        title = eitherResponse.value.title,
-                        commentCount = eitherResponse.value.commentCount,
-                        socialImage = eitherResponse.value.socialImage,
-                        postedTime = eitherResponse.value.postedTime
-                    )
+                    is Either.Success -> mapNewsDetailsDTOToNewsItemUI.transform(eitherResponse.value)
 
                     is Either.Fail -> NewsItemUI(
                         id = newsEntity.newsId,
                         title = newsEntity.titleNews,
                         commentCount = "0",
                         socialImage = "",
-                        postedTime = "00:00 00.00.00"
+                        postedTime = FormatterDate.formatDateBDToStringUI(newsEntity.postedTime.toString())
                     )
                 }
             }

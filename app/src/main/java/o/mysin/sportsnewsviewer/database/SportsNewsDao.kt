@@ -8,7 +8,8 @@ import o.mysin.sportsnewsviewer.database.entity.FavoriteNewsEntity
 
 @Dao
 interface SportsNewsDao {
-    @Query("SELECT * FROM favorite_news")
+
+    @Query("SELECT * FROM favorite_news ORDER BY posted_time DESC")
     suspend fun getAllFavoriteNews(): List<FavoriteNewsEntity>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

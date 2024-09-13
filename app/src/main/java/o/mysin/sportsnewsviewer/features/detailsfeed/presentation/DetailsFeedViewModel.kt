@@ -5,7 +5,7 @@ import kotlinx.coroutines.launch
 import o.mysin.sportsnewsviewer.R
 import o.mysin.sportsnewsviewer.base.BaseViewModel
 import o.mysin.sportsnewsviewer.base.BaseStatusScreen
-import o.mysin.sportsnewsviewer.data.mappers.MapNewsDetailsDTOToNewsDetailsUI
+import o.mysin.sportsnewsviewer.data.mappers.dtoToUI.MapNewsDetailsDTOToNewsDetailsUI
 import o.mysin.sportsnewsviewer.data.utils.Either
 import o.mysin.sportsnewsviewer.features.detailsfeed.presentation.models.DetailsFeedAction
 import o.mysin.sportsnewsviewer.features.detailsfeed.presentation.models.DetailsFeedEvent

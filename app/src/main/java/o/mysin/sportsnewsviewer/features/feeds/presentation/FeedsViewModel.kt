@@ -4,7 +4,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import o.mysin.sportsnewsviewer.base.BaseViewModel
 import o.mysin.sportsnewsviewer.base.BaseStatusScreen
-import o.mysin.sportsnewsviewer.data.mappers.MapNewsItemDTOToNewsItemUI
+import o.mysin.sportsnewsviewer.data.mappers.dtoToUI.MapNewsItemDTOToNewsItemUI
 import o.mysin.sportsnewsviewer.data.utils.Either
 import o.mysin.sportsnewsviewer.features.feeds.presentation.models.FeedsAction
 import o.mysin.sportsnewsviewer.features.feeds.presentation.models.FeedsEvent

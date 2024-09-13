@@ -8,4 +8,5 @@ import androidx.room.PrimaryKey
 data class FavoriteNewsEntity(
     @PrimaryKey @ColumnInfo(name = "news_id") val newsId: Int,
     @ColumnInfo(name = "title_news") val titleNews: String,
+    @ColumnInfo(name = "posted_time") val postedTime: Long,
 )
