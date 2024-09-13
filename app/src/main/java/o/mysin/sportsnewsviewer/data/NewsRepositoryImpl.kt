@@ -83,4 +83,8 @@ internal class NewsRepositoryImpl(
         sportsNewsDao.deleteAllFavoriteNews()
     }
 
+    override suspend fun getCountEntryFavoriteDatabase(): Int {
+        return sportsNewsDao.getCountNewsFavorite()
+    }
+
 }

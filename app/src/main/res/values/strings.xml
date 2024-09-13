@@ -19,7 +19,8 @@
     <string name="clear_favorite_data">Очистить избранное</string>
     <string name="button_name_clear">Clear</string>
     <string name="settings_description_alert_dialog">Вы действительно хотите очистить Ваш список избранных новостей?</string>
-
+    <string name="toast_clean_bd">Ваш список избранных пуст</string>
+    <string name="toast_error_clean_bd">При оичстки списка произошла ошибка. Наши разработчики уже работают над этой проблемой</string>
 
     <!-- Common -->
     <string name="comment_for_feed">Комменарии к посту</string>
