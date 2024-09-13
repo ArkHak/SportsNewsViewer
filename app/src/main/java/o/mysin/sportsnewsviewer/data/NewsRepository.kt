@@ -12,4 +12,5 @@ internal interface NewsRepository {
     suspend fun saveFavoriteNews(favoriteNews: NewsDetailsUI)
     suspend fun removeFavoriteNews(newsId: Int)
     suspend fun checkExistsFavoritesNewsInDatabase(newsId: Int): Boolean
+    suspend fun clearFavoriteNewsDatabase()
 }

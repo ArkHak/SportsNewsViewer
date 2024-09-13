@@ -79,4 +79,8 @@ internal class NewsRepositoryImpl(
     override suspend fun checkExistsFavoritesNewsInDatabase(newsId: Int): Boolean =
         favoriteNewsDao.checkNewsFavoriteExists(newsId = newsId)
 
+    override suspend fun clearFavoriteNewsDatabase() {
+        favoriteNewsDao.deleteAllFavoriteNews()
+    }
+
 }

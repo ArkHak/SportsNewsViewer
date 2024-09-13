@@ -10,6 +10,7 @@
 ---
 ### Технологический стек:
 - Single Activity
+- MVI + MVVM
 - Single Module (но архитектурно готово для Многомодульного)
 - Kotlin 2.0
 - Compose

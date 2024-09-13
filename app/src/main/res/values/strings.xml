@@ -18,10 +18,15 @@
     <string name="dark_theme_button">Темная тема</string>
     <string name="clear_favorite_data">Очистить избранное</string>
     <string name="button_name_clear">Clear</string>
+    <string name="settings_description_alert_dialog">Вы действительно хотите очистить Ваш список избранных новостей?</string>
+
 
     <!-- Common -->
     <string name="comment_for_feed">Комменарии к посту</string>
     <string name="name_database">sports_news_database</string>
+    <string name="title_alert_dialog">Подтверждение действия</string>
+    <string name="alert_dialog_dismiss">Отмена</string>
+    <string name="alert_dialog_confirm">Да</string>
 
 
 </resources>

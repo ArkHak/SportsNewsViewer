@@ -28,13 +28,15 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import o.mysin.sportsnewsviewer.R
+import o.mysin.sportsnewsviewer.features.settings.presentation.models.SettingsEvent
 import o.mysin.sportsnewsviewer.ui.theme.SportsTheme
 
 @Composable
 internal fun SettingsView(
 //    viewState: SettingsViewState,
-//    eventHandler: (NewsEvent) -> Unit,
+    eventHandler: (SettingsEvent) -> Unit,
 ) {
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -109,7 +111,7 @@ internal fun SettingsView(
 
 
             Button(
-                onClick = {},
+                onClick = { eventHandler.invoke(SettingsEvent.CleanBdButtonPressed) },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = SportsTheme.colors.warningColor,
                     contentColor = SportsTheme.colors.onWarningColor,

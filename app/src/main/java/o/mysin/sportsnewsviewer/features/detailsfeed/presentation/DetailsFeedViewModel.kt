@@ -31,7 +31,6 @@ internal class DetailsFeedViewModel(
 
             DetailsFeedEvent.FavoriteIconPressed -> {
                 changeExistsFavoriteNewsDatabase()
-
             }
         }
     }
