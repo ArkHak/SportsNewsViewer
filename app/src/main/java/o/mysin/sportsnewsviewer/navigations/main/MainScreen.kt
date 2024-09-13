@@ -111,7 +111,13 @@ fun MainScreen() {
             composable<MainScreens.Feeds> {
                 FeedsScreen(
                     feedClick = { feedId ->
-                        outerNavController.navigate(AppScreens.Detail(feedId = feedId))
+                        outerNavController.navigate(AppScreens.Detail(feedId = feedId)){
+                            popUpTo(AppScreens.Main) {
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
                     }
                 )
             }

@@ -1,6 +1,8 @@
 package o.mysin.sportsnewsviewer.features.feeds.presentation
 
 import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import o.mysin.sportsnewsviewer.base.BaseViewModel
 import o.mysin.sportsnewsviewer.base.BaseStatusScreen
@@ -31,6 +33,17 @@ internal class FeedsViewModel(
         }
     }
 
+    private fun getPagingNewsList() {
+        viewModelScope.launch {
+            getNewsListUseCase.invokePaging()
+                .distinctUntilChanged()
+                .cachedIn(viewModelScope)
+                .collect {
+                    viewState.newsPagingList.value = it
+                }
+        }
+    }
+
     private fun feedsListRefresh() {
         viewState = viewState.copy(isRefreshingStatus = true)
         loadingNews()
@@ -40,9 +53,11 @@ internal class FeedsViewModel(
     private fun loadingNews() {
         viewState = viewState.copy(isStatus = BaseStatusScreen.LOADING)
         viewModelScope.launch {
-            when (val eitherResponse = getNewsListUseCase.invoke()) {
+            getPagingNewsList()
+
+            viewState = when (val eitherResponse = getNewsListUseCase.invoke()) {
                 is Either.Success -> {
-                    viewState = viewState.copy(
+                    viewState.copy(
                         newsList = eitherResponse.value.listNews.map { newsItemDTO ->
                             toNewsItemUI.transform(newsItemDTO)
                         },
@@ -51,7 +66,7 @@ internal class FeedsViewModel(
                 }
 
                 is Either.Fail -> {
-                    viewState = viewState.copy(isStatus = BaseStatusScreen.ERROR)
+                    viewState.copy(isStatus = BaseStatusScreen.ERROR)
                 }
             }
         }
