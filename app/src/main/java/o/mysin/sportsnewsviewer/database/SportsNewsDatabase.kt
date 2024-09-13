@@ -8,21 +8,21 @@ import o.mysin.sportsnewsviewer.R
 import o.mysin.sportsnewsviewer.database.entity.FavoriteNewsEntity
 
 @Database(entities = [FavoriteNewsEntity::class], version = 1)
-abstract class SportNewsDatabase : RoomDatabase() {
+abstract class SportsNewsDatabase : RoomDatabase() {
 
-    abstract fun favoriteNewsDao(): FavoriteNewsDao
+    abstract fun sportsNewsDao(): SportsNewsDao
 
     companion object {
         @Volatile
-        private var Instance: SportNewsDatabase? = null
+        private var Instance: SportsNewsDatabase? = null
 
         fun getDatabase(
             context: Context,
-        ): SportNewsDatabase {
+        ): SportsNewsDatabase {
             return Instance ?: synchronized(this) {
                 Room.databaseBuilder(
                     context,
-                    SportNewsDatabase::class.java,
+                    SportsNewsDatabase::class.java,
                     context.getString(R.string.name_database)
                 )
                     .fallbackToDestructiveMigration()

@@ -12,7 +12,7 @@ import o.mysin.sportsnewsviewer.data.dto.NewsListResponseDTO
 import o.mysin.sportsnewsviewer.data.model.NewsDetailsUI
 import o.mysin.sportsnewsviewer.data.utils.Either
 import o.mysin.sportsnewsviewer.data.utils.HttpError
-import o.mysin.sportsnewsviewer.database.FavoriteNewsDao
+import o.mysin.sportsnewsviewer.database.SportsNewsDao
 import o.mysin.sportsnewsviewer.database.mapper.FavoriteNewsEntityMapper
 import o.mysin.sportsnewsviewer.network.NetworkConstant.ENDPOINT_GET_DETAILS_FEED
 import o.mysin.sportsnewsviewer.network.NetworkConstant.ENDPOINT_GET_NEWS_LIST
@@ -26,7 +26,7 @@ import o.mysin.sportsnewsviewer.network.NetworkConstant.PAR_FROM
 
 internal class NewsRepositoryImpl(
     private val ktorApi: HttpClient,
-    private val favoriteNewsDao: FavoriteNewsDao,
+    private val sportsNewsDao: SportsNewsDao,
     private val favoriteNewsEntityMapper: FavoriteNewsEntityMapper,
 ) : NewsRepository {
 
@@ -65,7 +65,7 @@ internal class NewsRepositoryImpl(
         }
 
     override suspend fun saveFavoriteNews(favoriteNews: NewsDetailsUI) {
-        favoriteNewsDao.insertFavoriteNews(
+        sportsNewsDao.insertFavoriteNews(
             favoriteNewsEntityMapper.toFavoriteNewsEntity(
                 favoriteNews
             )
@@ -73,14 +73,14 @@ internal class NewsRepositoryImpl(
     }
 
     override suspend fun removeFavoriteNews(newsId: Int) {
-        favoriteNewsDao.removeFavoriteNews(newsId)
+        sportsNewsDao.removeFavoriteNews(newsId)
     }
 
     override suspend fun checkExistsFavoritesNewsInDatabase(newsId: Int): Boolean =
-        favoriteNewsDao.checkNewsFavoriteExists(newsId = newsId)
+        sportsNewsDao.checkNewsFavoriteExists(newsId = newsId)
 
     override suspend fun clearFavoriteNewsDatabase() {
-        favoriteNewsDao.deleteAllFavoriteNews()
+        sportsNewsDao.deleteAllFavoriteNews()
     }
 
 }
