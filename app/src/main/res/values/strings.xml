@@ -12,7 +12,7 @@
     <string name="toast_add_news_bd">Новость добавлена в избранное</string>
     <string name="toast_removed_news_bd">Новость удалена из избранного</string>
 
-    <!-- Settings_screen -->
+    <!-- Settings screen -->
     <string name="cont_des_switcher_theme">Переключатель темы</string>
     <string name="cont_des_clean_favorite_data">Clear</string>
     <string name="dark_theme_button">Темная тема</string>
@@ -21,6 +21,12 @@
     <string name="settings_description_alert_dialog">Вы действительно хотите очистить Ваш список избранных новостей?</string>
     <string name="toast_clean_bd">Ваш список избранных пуст</string>
     <string name="toast_error_clean_bd">При оичстки списка произошла ошибка. Наши разработчики уже работают над этой проблемой</string>
+
+
+    <!-- Feeds Screen -->
+    <string name="tag_error_loading_feed_item">TAG_ERROR_LOADING_FEED_ITEM</string>
+    <string name="error_feeds_view_loading_message">FeedsViewLoading: %1$s</string>
+
 
     <!-- Common -->
     <string name="comment_for_feed">Комменарии к посту</string>
