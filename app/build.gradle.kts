@@ -81,5 +81,8 @@ dependencies {
     implementation(libs.paging.runtime.ktx)
     implementation(libs.paging.compose)
 
+    //Datastore
+    implementation(libs.datastore)
+
 
 }

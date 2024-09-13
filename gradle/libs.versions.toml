@@ -21,6 +21,8 @@ ksp = "2.0.20-1.0.24"
 #Paging
 paging = "3.1.1"
 pagingCompose = "1.0.0-alpha18"
+#DataStore
+datastore = "1.1.1"
 
 
 [libraries]
@@ -52,20 +54,21 @@ ktor-serialization-json = { module = "io.ktor:ktor-serialization-kotlinx-json", 
 compose-coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 
 #Room
-room-runtime = {module= "androidx.room:room-runtime", version.ref= "room"}
-room-ktx = {module= "androidx.room:room-ktx", version.ref= "room"}
-room-compiler = {module= "androidx.room:room-compiler", version.ref= "room"}
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 
 #Paging
-paging-runtime-ktx = {module = "androidx.paging:paging-runtime", version.ref = "paging"}
-paging-compose = {module = "androidx.paging:paging-compose", version.ref = "pagingCompose"}
+paging-runtime-ktx = { module = "androidx.paging:paging-runtime", version.ref = "paging" }
+paging-compose = { module = "androidx.paging:paging-compose", version.ref = "pagingCompose" }
 
-
+#DataStore
+datastore = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-kotlin-ksp = {id = "com.google.devtools.ksp", version.ref = "ksp"}
+kotlin-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 

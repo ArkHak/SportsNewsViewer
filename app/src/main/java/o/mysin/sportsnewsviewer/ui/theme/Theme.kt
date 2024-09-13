@@ -18,12 +18,12 @@ internal val LocalThemeIsDark = compositionLocalOf { mutableStateOf(false) }
 internal fun AppTheme(
     content: @Composable() () -> Unit,
 ) {
-    val systemIsDark = isSystemInDarkTheme()
+    var systemIsDark = isSystemInDarkTheme()
     val isDarkState = remember { mutableStateOf(systemIsDark) }
     CompositionLocalProvider(
         LocalThemeIsDark provides isDarkState,
-        LocalSportsColor provides lightPallete,
-        content = {
+        LocalSportsColor provides if (isDarkState.value) darkPallete else lightPallete,
+        content = {darkPallete
             Box(
                 modifier = Modifier
                     .fillMaxSize()

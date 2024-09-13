@@ -1,5 +1,6 @@
 package o.mysin.sportsnewsviewer.features.settings.ui
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -29,11 +30,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import o.mysin.sportsnewsviewer.R
 import o.mysin.sportsnewsviewer.features.settings.presentation.models.SettingsEvent
+import o.mysin.sportsnewsviewer.features.settings.presentation.models.SettingsViewState
+import o.mysin.sportsnewsviewer.ui.theme.LocalThemeIsDark
 import o.mysin.sportsnewsviewer.ui.theme.SportsTheme
 
 @Composable
 internal fun SettingsView(
-//    viewState: SettingsViewState,
+    viewState: SettingsViewState,
     eventHandler: (SettingsEvent) -> Unit,
 ) {
 
@@ -45,7 +48,7 @@ internal fun SettingsView(
                 vertical = dimensionResource(R.dimen.extra_large_padding_space)
             )
     ) {
-        var checkedTheme by remember { mutableStateOf(true) }
+        LocalThemeIsDark.current.value = viewState.isDarkTheme
 
         Row(
             verticalAlignment = Alignment.CenterVertically
@@ -70,9 +73,9 @@ internal fun SettingsView(
             Spacer(Modifier.weight(1f))
 
             Switch(
-                checked = checkedTheme,
+                checked = viewState.isDarkTheme,
                 onCheckedChange = {
-                    checkedTheme = it
+                    eventHandler.invoke(SettingsEvent.SaveIsDarkTheme(it))
                 },
 
                 colors = SwitchDefaults.colors(

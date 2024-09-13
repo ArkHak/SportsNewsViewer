@@ -16,12 +16,12 @@ internal fun SettingsAlertDialogView(
     eventHandler: (SettingsEvent) -> Unit,
 ) {
     AlertDialog(
-        onDismissRequest = { eventHandler.invoke(SettingsEvent.onDismissPressedAlertDialog) },
+        onDismissRequest = { eventHandler.invoke(SettingsEvent.OnDismissPressedAlertDialog) },
         title = { Text(text = stringResource(R.string.title_alert_dialog)) },
         text = { Text(stringResource(R.string.settings_description_alert_dialog)) },
         confirmButton = {
             Button(
-                onClick = { eventHandler.invoke(SettingsEvent.onConfirmPressedAlertDialog) },
+                onClick = { eventHandler.invoke(SettingsEvent.OnConfirmPressedAlertDialog) },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = SportsTheme.colors.accentColor,
                     contentColor = SportsTheme.colors.onWarningColor,
@@ -32,7 +32,7 @@ internal fun SettingsAlertDialogView(
         },
         dismissButton = {
             Button(
-                onClick = { eventHandler.invoke(SettingsEvent.onDismissPressedAlertDialog) },
+                onClick = { eventHandler.invoke(SettingsEvent.OnDismissPressedAlertDialog) },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = SportsTheme.colors.warningColor,
                     contentColor = SportsTheme.colors.onWarningColor,

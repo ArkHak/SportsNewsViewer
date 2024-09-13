@@ -17,8 +17,7 @@ internal fun SettingsScreen(
     val viewState by settingsViewModel.viewStates().collectAsState()
     val viewAction by settingsViewModel.viewActions().collectAsState(null)
 
-
-    SettingsView { event ->
+    SettingsView(viewState = viewState) { event ->
         settingsViewModel.obtainEvent(event)
     }
 

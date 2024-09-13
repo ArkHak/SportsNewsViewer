@@ -1,5 +1,6 @@
 package o.mysin.sportsnewsviewer.di
 
+import o.mysin.sportsnewsviewer.data.DataStoreManager
 import o.mysin.sportsnewsviewer.data.NewsRepository
 import o.mysin.sportsnewsviewer.data.NewsRepositoryImpl
 import o.mysin.sportsnewsviewer.data.remote.ApiService
@@ -13,5 +14,7 @@ val appModule = module {
     singleOf(::NewsRepositoryImpl) { bind<NewsRepository>() }
     singleOf(::ApiService)
     singleOf(::PostPagingDataSource)
+
+    singleOf(::DataStoreManager)
 
 }

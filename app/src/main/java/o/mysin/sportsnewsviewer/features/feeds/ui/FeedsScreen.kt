@@ -9,6 +9,7 @@ import o.mysin.sportsnewsviewer.features.feeds.presentation.FeedsViewModel
 import o.mysin.sportsnewsviewer.features.feeds.presentation.models.FeedsAction
 import o.mysin.sportsnewsviewer.features.feeds.presentation.models.FeedsEvent
 import o.mysin.sportsnewsviewer.ui.common.LoadingIndicator
+import o.mysin.sportsnewsviewer.ui.theme.LocalThemeIsDark
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -41,13 +42,17 @@ internal fun FeedsScreen(
         BaseStatusScreen.ERROR -> {}
     }
 
-    when (viewAction) {
-        is FeedsAction.OpenDetailFeedScreen -> {
-            val id = (viewAction as FeedsAction.OpenDetailFeedScreen).feedId
-            feedClick(id)
-            feedsViewModel.clearAction()
-        }
+    viewAction?.let { viewActionCurrent ->
+        when (viewActionCurrent) {
+            is FeedsAction.OpenDetailFeedScreen -> {
+                val id = viewActionCurrent.feedId
+                feedClick(id)
+                feedsViewModel.clearAction()
+            }
 
-        null -> {}
+            is FeedsAction.UpdateAppTheme -> {
+                LocalThemeIsDark.current.value = viewActionCurrent.isDarkTheme
+            }
+        }
     }
 }
