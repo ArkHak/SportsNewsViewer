@@ -3,10 +3,10 @@ package o.mysin.sportsnewsviewer.features.feeds.ui
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import o.mysin.sportsnewsviewer.base.BaseStatusScreen
 import o.mysin.sportsnewsviewer.features.feeds.presentation.FeedsViewModel
 import o.mysin.sportsnewsviewer.features.feeds.presentation.models.FeedsAction
 import o.mysin.sportsnewsviewer.features.feeds.presentation.models.FeedsEvent
-import o.mysin.sportsnewsviewer.features.feeds.presentation.models.StatusScreen
 import o.mysin.sportsnewsviewer.ui.common.LoadingIndicator
 import org.koin.androidx.compose.koinViewModel
 
@@ -19,11 +19,11 @@ internal fun FeedsScreen(
     val viewAction by feedsViewModel.viewActions().collectAsState(null)
 
     when (viewState.isStatus) {
-        StatusScreen.NULL -> {
+        BaseStatusScreen.NULL -> {
             feedsViewModel.obtainEvent(FeedsEvent.LoadingData)
         }
 
-        StatusScreen.SUCCESS -> {
+        BaseStatusScreen.SUCCESS -> {
             FeedsView(
                 viewState = viewState
             ) { event ->
@@ -31,11 +31,11 @@ internal fun FeedsScreen(
             }
         }
 
-        StatusScreen.LOADING -> {
+        BaseStatusScreen.LOADING -> {
             LoadingIndicator()
         }
 
-        StatusScreen.ERROR -> {}
+        BaseStatusScreen.ERROR -> {}
     }
 
     when (viewAction) {

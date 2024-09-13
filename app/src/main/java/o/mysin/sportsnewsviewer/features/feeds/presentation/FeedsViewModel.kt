@@ -3,12 +3,12 @@ package o.mysin.sportsnewsviewer.features.feeds.presentation
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import o.mysin.sportsnewsviewer.base.BaseViewModel
+import o.mysin.sportsnewsviewer.base.BaseStatusScreen
 import o.mysin.sportsnewsviewer.data.mappers.MapNewsItemDTOToNewsItemUI
 import o.mysin.sportsnewsviewer.data.utils.Either
 import o.mysin.sportsnewsviewer.features.feeds.presentation.models.FeedsAction
 import o.mysin.sportsnewsviewer.features.feeds.presentation.models.FeedsEvent
 import o.mysin.sportsnewsviewer.features.feeds.presentation.models.FeedsViewState
-import o.mysin.sportsnewsviewer.features.feeds.presentation.models.StatusScreen
 import o.mysin.sportsnewsviewer.features.feeds.presentation.usecase.GetNewsListUseCase
 
 internal class FeedsViewModel(
@@ -38,7 +38,7 @@ internal class FeedsViewModel(
     }
 
     private fun loadingNews() {
-        viewState = viewState.copy(isStatus = StatusScreen.LOADING)
+        viewState = viewState.copy(isStatus = BaseStatusScreen.LOADING)
         viewModelScope.launch {
             when (val eitherResponse = getNewsListUseCase.invoke()) {
                 is Either.Success -> {
@@ -46,12 +46,12 @@ internal class FeedsViewModel(
                         newsList = eitherResponse.value.listNews.map { newsItemDTO ->
                             toNewsItemUI.transform(newsItemDTO)
                         },
-                        isStatus = StatusScreen.SUCCESS
+                        isStatus = BaseStatusScreen.SUCCESS
                     )
                 }
 
                 is Either.Fail -> {
-                    viewState = viewState.copy(isStatus = StatusScreen.ERROR)
+                    viewState = viewState.copy(isStatus = BaseStatusScreen.ERROR)
                 }
             }
         }

@@ -13,6 +13,7 @@ import o.mysin.sportsnewsviewer.data.model.NewsDetailsUI
 import o.mysin.sportsnewsviewer.data.utils.Either
 import o.mysin.sportsnewsviewer.data.utils.HttpError
 import o.mysin.sportsnewsviewer.database.SportsNewsDao
+import o.mysin.sportsnewsviewer.database.entity.FavoriteNewsEntity
 import o.mysin.sportsnewsviewer.database.mapper.FavoriteNewsEntityMapper
 import o.mysin.sportsnewsviewer.network.NetworkConstant.ENDPOINT_GET_DETAILS_FEED
 import o.mysin.sportsnewsviewer.network.NetworkConstant.ENDPOINT_GET_NEWS_LIST
@@ -63,6 +64,10 @@ internal class NewsRepositoryImpl(
                 Either.fail(HttpError.NetworkError())
             }
         }
+
+    override suspend fun getFavoriteNews(): List<FavoriteNewsEntity> =
+        sportsNewsDao.getAllFavoriteNews()
+
 
     override suspend fun saveFavoriteNews(favoriteNews: NewsDetailsUI) {
         sportsNewsDao.insertFavoriteNews(

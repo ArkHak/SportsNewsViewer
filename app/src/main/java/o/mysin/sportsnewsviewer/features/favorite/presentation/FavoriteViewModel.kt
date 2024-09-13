@@ -1,20 +1,60 @@
 package o.mysin.sportsnewsviewer.features.favorite.presentation
 
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
+import o.mysin.sportsnewsviewer.base.BaseStatusScreen
 import o.mysin.sportsnewsviewer.base.BaseViewModel
 import o.mysin.sportsnewsviewer.features.favorite.presentation.models.FavoriteAction
 import o.mysin.sportsnewsviewer.features.favorite.presentation.models.FavoriteEvent
 import o.mysin.sportsnewsviewer.features.favorite.presentation.models.FavoriteViewState
-import o.mysin.sportsnewsviewer.features.feeds.presentation.models.FeedsAction
+import o.mysin.sportsnewsviewer.features.favorite.presentation.usecase.GetFavoriteNewsListUseCase
 
-internal class FavoriteViewModel :
+internal class FavoriteViewModel(
+    private val getFavoriteNewsListUseCase: GetFavoriteNewsListUseCase,
+) :
     BaseViewModel<FavoriteViewState, FavoriteAction, FavoriteEvent>(initialState = FavoriteViewState()) {
     override fun obtainEvent(viewEvent: FavoriteEvent) {
         when (viewEvent) {
+
+            FavoriteEvent.LoadingData -> loadingFavoriteNews()
+
             is FavoriteEvent.FeedClicked -> {
                 feedClicked(viewEvent.feedId)
             }
+
         }
     }
+
+    private fun loadingFavoriteNews() {
+        viewState = viewState.copy(isStatus = BaseStatusScreen.LOADING)
+        viewModelScope.launch {
+            val list = getFavoriteNewsListUseCase.invoke()
+            viewState = viewState.copy(
+                favoriteNewsList = list,
+                isStatus = BaseStatusScreen.SUCCESS
+            )
+        }
+    }
+
+    //private fun loadingNews() {
+    //        viewState = viewState.copy(isStatus = BaseStatusScreen.LOADING)
+    //        viewModelScope.launch {
+    //            when (val eitherResponse = getNewsListUseCase.invoke()) {
+    //                is Either.Success -> {
+    //                    viewState = viewState.copy(
+    //                        newsList = eitherResponse.value.listNews.map { newsItemDTO ->
+    //                            toNewsItemUI.transform(newsItemDTO)
+    //                        },
+    //                        isStatus = BaseStatusScreen.SUCCESS
+    //                    )
+    //                }
+    //
+    //                is Either.Fail -> {
+    //                    viewState = viewState.copy(isStatus = BaseStatusScreen.ERROR)
+    //                }
+    //            }
+    //        }
+    //    }
 
 
     private fun feedClicked(feedId: Int) {

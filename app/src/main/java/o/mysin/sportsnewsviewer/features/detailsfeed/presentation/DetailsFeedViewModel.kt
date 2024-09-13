@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import o.mysin.sportsnewsviewer.R
 import o.mysin.sportsnewsviewer.base.BaseViewModel
+import o.mysin.sportsnewsviewer.base.BaseStatusScreen
 import o.mysin.sportsnewsviewer.data.mappers.MapNewsDetailsDTOToNewsDetailsUI
 import o.mysin.sportsnewsviewer.data.utils.Either
 import o.mysin.sportsnewsviewer.features.detailsfeed.presentation.models.DetailsFeedAction
@@ -12,7 +13,6 @@ import o.mysin.sportsnewsviewer.features.detailsfeed.presentation.models.Details
 import o.mysin.sportsnewsviewer.features.detailsfeed.presentation.usecase.CheckExistsNewsDatabaseUseCase
 import o.mysin.sportsnewsviewer.features.detailsfeed.presentation.usecase.GetNewsByIdUseCase
 import o.mysin.sportsnewsviewer.features.detailsfeed.presentation.usecase.ChangeExistsNewsDatabaseUseCase
-import o.mysin.sportsnewsviewer.features.feeds.presentation.models.StatusScreen
 
 internal class DetailsFeedViewModel(
     private val getNewsByIdUseCase: GetNewsByIdUseCase,
@@ -40,7 +40,7 @@ internal class DetailsFeedViewModel(
     }
 
     private fun loadingFeed(feedId: Int) {
-        viewState = viewState.copy(isStatus = StatusScreen.LOADING)
+        viewState = viewState.copy(isStatus = BaseStatusScreen.LOADING)
         viewModelScope.launch {
             when (val eitherResponse = getNewsByIdUseCase.invoke(feedId)) {
                 is Either.Success -> {
@@ -48,12 +48,12 @@ internal class DetailsFeedViewModel(
                     viewState = viewState.copy(
                         newsDetails = toNewsDetailUI.transform(eitherResponse.value),
                         isNewsFavorite = exists,
-                        isStatus = StatusScreen.SUCCESS
+                        isStatus = BaseStatusScreen.SUCCESS
                     )
                 }
 
                 is Either.Fail -> {
-                    viewState = viewState.copy(isStatus = StatusScreen.ERROR)
+                    viewState = viewState.copy(isStatus = BaseStatusScreen.ERROR)
                 }
             }
         }
