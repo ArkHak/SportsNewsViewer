@@ -116,9 +116,12 @@ fun MainScreen() {
                     }
                 )
             }
+
             composable<MainScreens.Favorite> {
                 FavoriteScreen(
-                    feedClick = { outerNavController.navigate(AppScreens.Detail) }
+                    feedClick = { feedId ->
+                        outerNavController.navigate(AppScreens.Detail(feedId = feedId))
+                    }
                 )
             }
             composable<MainScreens.Settings> { SettingsScreen() }

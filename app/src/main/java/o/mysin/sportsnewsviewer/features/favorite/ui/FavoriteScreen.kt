@@ -10,21 +10,24 @@ import o.mysin.sportsnewsviewer.features.favorite.presentation.models.FavoriteAc
 @Composable
 internal fun FavoriteScreen(
     favoriteViewModel: FavoriteViewModel = viewModel { FavoriteViewModel() },
-    feedClick: () -> Unit,
+    feedClick: (Int) -> Unit,
 ) {
     val viewState by favoriteViewModel.viewStates().collectAsState()
     val viewAction by favoriteViewModel.viewActions().collectAsState(null)
 
-    FavoriteView() { event ->
+    FavoriteView(
+        viewState = viewState
+    ) { event ->
         favoriteViewModel.obtainEvent(event)
     }
 
     when (viewAction) {
-        FavoriteAction.OpenDetailFeedScreen -> {
-            feedClick()
-            favoriteViewModel.clearAction()
-        }
-
         null -> {}
+        is FavoriteAction.OpenDetailFeedScreen -> {
+            val id = (viewAction as FavoriteAction.OpenDetailFeedScreen).feedId
+            feedClick(id)
+            favoriteViewModel.clearAction()
+
+        }
     }
 }
