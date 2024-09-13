@@ -1,4 +1,4 @@
-package o.mysin.sportsnewsviewer.data.mappers
+package o.mysin.sportsnewsviewer.data.mappers.dtoToUI
 
 import android.text.Html
 import o.mysin.sportsnewsviewer.base.Mapper
@@ -13,7 +13,7 @@ class MapNewsDetailsDTOToNewsDetailsUI : Mapper<NewsDetailsDTO, NewsDetailsUI> {
             title = data.title,
             commentCount = data.commentCount,
             socialImage = data.socialImage,
-            postedTime = FormatterDate.formatDate(data.postedTime),
+            postedTime = FormatterDate.formatDateToStringUI(data.postedTime),
             description = clearHtml(data.description),
         )
     }
@@ -32,4 +32,3 @@ private fun getSubStringAfterFirstNewLine(text: String): String {
         text
     }
 }
-

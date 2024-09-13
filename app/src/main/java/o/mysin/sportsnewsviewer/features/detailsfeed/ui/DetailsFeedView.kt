@@ -11,7 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Divider
-import androidx.compose.material.Icon
+import androidx.compose.material3.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.TopAppBar
 import androidx.compose.material3.IconButton
@@ -82,6 +82,7 @@ internal fun DetailsFeedView(
     ) { innerPadding ->
 
         val scrollState = rememberScrollState()
+
         Column(
             Modifier
                 .verticalScroll(scrollState)
@@ -120,7 +121,6 @@ private fun FeedHeader(
     Column(
         modifier = Modifier.fillMaxWidth(),
     ) {
-        //TODO Нормальный дексрипшн
         Row(
             modifier = Modifier
                 .fillMaxWidth(),
@@ -184,7 +184,7 @@ private fun FeedBottom(
         ) {
             Icon(
                 painter = painterResource(R.drawable.ic_comment),
-                contentDescription = "Комменарии к посту",
+                contentDescription = stringResource(R.string.cont_des_comment_icon),
                 tint = SportsTheme.colors.secondaryText
             )
 

@@ -1,4 +1,6 @@
 package o.mysin.sportsnewsviewer.features.settings.presentation.models
 
-class SettingsViewState {
-}
+data class SettingsViewState(
+    val dialogCleanBD: Boolean = false,
+    val isDarkTheme: Boolean = false,
+)

@@ -3,11 +3,13 @@ package o.mysin.sportsnewsviewer.features.feeds.ui
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.paging.compose.collectAsLazyPagingItems
+import o.mysin.sportsnewsviewer.base.BaseStatusScreen
 import o.mysin.sportsnewsviewer.features.feeds.presentation.FeedsViewModel
 import o.mysin.sportsnewsviewer.features.feeds.presentation.models.FeedsAction
 import o.mysin.sportsnewsviewer.features.feeds.presentation.models.FeedsEvent
-import o.mysin.sportsnewsviewer.features.feeds.presentation.models.StatusScreen
 import o.mysin.sportsnewsviewer.ui.common.LoadingIndicator
+import o.mysin.sportsnewsviewer.ui.theme.LocalThemeIsDark
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -17,34 +19,41 @@ internal fun FeedsScreen(
 ) {
     val viewState by feedsViewModel.viewStates().collectAsState()
     val viewAction by feedsViewModel.viewActions().collectAsState(null)
+    val data = viewState.newsPagingList.collectAsLazyPagingItems()
 
     when (viewState.isStatus) {
-        StatusScreen.NULL -> {
+        BaseStatusScreen.NULL -> {
             feedsViewModel.obtainEvent(FeedsEvent.LoadingData)
         }
 
-        StatusScreen.SUCCESS -> {
+        BaseStatusScreen.SUCCESS -> {
             FeedsView(
+                data = data,
                 viewState = viewState
             ) { event ->
                 feedsViewModel.obtainEvent(event)
             }
         }
 
-        StatusScreen.LOADING -> {
+        BaseStatusScreen.LOADING -> {
             LoadingIndicator()
         }
 
-        StatusScreen.ERROR -> {}
+        BaseStatusScreen.ERROR -> {}
     }
 
-    when (viewAction) {
-        is FeedsAction.OpenDetailFeedScreen -> {
-            val id = (viewAction as FeedsAction.OpenDetailFeedScreen).feedId
-            feedClick(id)
-            feedsViewModel.clearAction()
-        }
+    viewAction?.let { viewActionCurrent ->
+        when (viewActionCurrent) {
+            is FeedsAction.OpenDetailFeedScreen -> {
+                val id = viewActionCurrent.feedId
+                feedClick(id)
+                feedsViewModel.clearAction()
+            }
 
-        null -> {}
+            is FeedsAction.UpdateAppTheme -> {
+                LocalThemeIsDark.current.value = viewActionCurrent.isDarkTheme
+                feedsViewModel.clearAction()
+            }
+        }
     }
 }

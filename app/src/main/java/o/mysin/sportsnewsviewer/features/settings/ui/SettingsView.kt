@@ -14,10 +14,6 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,13 +24,17 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import o.mysin.sportsnewsviewer.R
+import o.mysin.sportsnewsviewer.features.settings.presentation.models.SettingsEvent
+import o.mysin.sportsnewsviewer.features.settings.presentation.models.SettingsViewState
+import o.mysin.sportsnewsviewer.ui.theme.LocalThemeIsDark
 import o.mysin.sportsnewsviewer.ui.theme.SportsTheme
 
 @Composable
 internal fun SettingsView(
-//    viewState: SettingsViewState,
-//    eventHandler: (NewsEvent) -> Unit,
+    viewState: SettingsViewState,
+    eventHandler: (SettingsEvent) -> Unit,
 ) {
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -43,7 +43,7 @@ internal fun SettingsView(
                 vertical = dimensionResource(R.dimen.extra_large_padding_space)
             )
     ) {
-        var checkedTheme by remember { mutableStateOf(true) }
+        LocalThemeIsDark.current.value = viewState.isDarkTheme
 
         Row(
             verticalAlignment = Alignment.CenterVertically
@@ -68,9 +68,9 @@ internal fun SettingsView(
             Spacer(Modifier.weight(1f))
 
             Switch(
-                checked = checkedTheme,
+                checked = viewState.isDarkTheme,
                 onCheckedChange = {
-                    checkedTheme = it
+                    eventHandler.invoke(SettingsEvent.SaveIsDarkTheme(it))
                 },
 
                 colors = SwitchDefaults.colors(
@@ -109,7 +109,7 @@ internal fun SettingsView(
 
 
             Button(
-                onClick = {},
+                onClick = { eventHandler.invoke(SettingsEvent.CleanBdButtonPressed) },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = SportsTheme.colors.warningColor,
                     contentColor = SportsTheme.colors.onWarningColor,

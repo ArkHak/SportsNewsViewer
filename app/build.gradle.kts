@@ -77,7 +77,12 @@ dependencies {
     //Coil
     implementation(libs.compose.coil)
 
-    //Room
+    //Paging
+    implementation(libs.paging.runtime.ktx)
+    implementation(libs.paging.compose)
+
+    //Datastore
+    implementation(libs.datastore)
 
 
 }

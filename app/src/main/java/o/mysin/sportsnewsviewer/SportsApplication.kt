@@ -1,10 +1,13 @@
 package o.mysin.sportsnewsviewer
 
 import android.app.Application
+import o.mysin.sportsnewsviewer.data.di.mappersModule
 import o.mysin.sportsnewsviewer.database.di.databaseModule
 import o.mysin.sportsnewsviewer.di.appModule
 import o.mysin.sportsnewsviewer.features.detailsfeed.di.detailsFeedModule
+import o.mysin.sportsnewsviewer.features.favorite.di.favoriteModule
 import o.mysin.sportsnewsviewer.features.feeds.di.feedsModule
+import o.mysin.sportsnewsviewer.features.settings.di.settingsModule
 import o.mysin.sportsnewsviewer.network.di.networkModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -21,7 +24,10 @@ class SportsApplication : Application() {
                 feedsModule,
                 detailsFeedModule,
                 networkModule,
-                databaseModule
+                databaseModule,
+                settingsModule,
+                favoriteModule,
+                mappersModule
             )
         }
     }

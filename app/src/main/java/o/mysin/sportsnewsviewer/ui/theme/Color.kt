@@ -11,3 +11,13 @@ val lightPallete = SportsColors(
     warningColor = Color(0xFF801414),
     onWarningColor = Color.White
 )
+
+val darkPallete = SportsColors(
+    primaryBackground = Color.White,
+    primaryText = Color.Black,
+    secondaryText = Color.Black,
+    secondaryBackground = Color.Black,
+    accentColor = Color.Black,
+    warningColor = Color.Black,
+    onWarningColor = Color.White
+)

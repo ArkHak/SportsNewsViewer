@@ -1,4 +1,4 @@
-package o.mysin.sportsnewsviewer.features.navigations
+package o.mysin.sportsnewsviewer.navigations
 
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.navigation.NavHostController

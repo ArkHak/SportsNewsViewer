@@ -1,4 +1,4 @@
-package o.mysin.sportsnewsviewer.features.navigations.main
+package o.mysin.sportsnewsviewer.navigations.main
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,9 +21,9 @@ import androidx.navigation.compose.rememberNavController
 import kotlinx.serialization.Serializable
 import o.mysin.sportsnewsviewer.R
 import o.mysin.sportsnewsviewer.features.favorite.ui.FavoriteScreen
-import o.mysin.sportsnewsviewer.features.navigations.LocalNavHost
+import o.mysin.sportsnewsviewer.navigations.LocalNavHost
 import o.mysin.sportsnewsviewer.features.feeds.ui.FeedsScreen
-import o.mysin.sportsnewsviewer.features.navigations.AppScreens
+import o.mysin.sportsnewsviewer.navigations.AppScreens
 import o.mysin.sportsnewsviewer.features.settings.ui.SettingsScreen
 import o.mysin.sportsnewsviewer.ui.theme.SportsTheme
 
@@ -38,7 +38,6 @@ private sealed class MainScreens {
     data object Settings : MainScreens()
 }
 
-//TODO строки
 private enum class BottomTabs(
     val title: String,
     val icon: Int,
@@ -112,15 +111,25 @@ fun MainScreen() {
             composable<MainScreens.Feeds> {
                 FeedsScreen(
                     feedClick = { feedId ->
+                        outerNavController.navigate(AppScreens.Detail(feedId = feedId)){
+                            popUpTo(AppScreens.Main) {
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
+                    }
+                )
+            }
+
+            composable<MainScreens.Favorite> {
+                FavoriteScreen(
+                    feedClick = { feedId ->
                         outerNavController.navigate(AppScreens.Detail(feedId = feedId))
                     }
                 )
             }
-            composable<MainScreens.Favorite> {
-                FavoriteScreen(
-                    feedClick = { outerNavController.navigate(AppScreens.Detail) }
-                )
-            }
+
             composable<MainScreens.Settings> { SettingsScreen() }
         }
     }
