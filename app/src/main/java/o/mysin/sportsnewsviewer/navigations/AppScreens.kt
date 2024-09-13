@@ -1,4 +1,4 @@
-package o.mysin.sportsnewsviewer.features.navigations
+package o.mysin.sportsnewsviewer.navigations
 
 import kotlinx.serialization.Serializable
 

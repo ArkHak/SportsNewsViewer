@@ -16,9 +16,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import o.mysin.sportsnewsviewer.features.detailsfeed.ui.DetailsFeedScreen
-import o.mysin.sportsnewsviewer.features.navigations.AppScreens
-import o.mysin.sportsnewsviewer.features.navigations.LocalNavHost
-import o.mysin.sportsnewsviewer.features.navigations.main.MainScreen
+import o.mysin.sportsnewsviewer.navigations.AppScreens
+import o.mysin.sportsnewsviewer.navigations.LocalNavHost
+import o.mysin.sportsnewsviewer.navigations.main.MainScreen
 import o.mysin.sportsnewsviewer.ui.theme.AppTheme
 
 class AppActivity : ComponentActivity() {
