@@ -8,6 +8,9 @@
     <string name="details_feed_news_header">Новость</string>
     <string name="cont_des_arrow_back">Вернуться на главный экран</string>
     <string name="cont_des_favorite_icon">Добавить в избранное</string>
+    <string name="cont_des_comment_icon">Комменарии к посту</string>
+    <string name="toast_add_news_bd">Новость добавлена в избранное</string>
+    <string name="toast_removed_news_bd">Новость удалена из избранного</string>
 
     <!-- Settings_screen -->
     <string name="cont_des_switcher_theme">Переключатель темы</string>
@@ -16,9 +19,9 @@
     <string name="clear_favorite_data">Очистить избранное</string>
     <string name="button_name_clear">Clear</string>
 
-
     <!-- Common -->
     <string name="comment_for_feed">Комменарии к посту</string>
     <string name="name_database">sports_news_database</string>
+
 
 </resources>

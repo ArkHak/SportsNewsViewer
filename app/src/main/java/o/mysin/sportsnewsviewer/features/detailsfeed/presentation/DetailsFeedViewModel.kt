@@ -2,6 +2,7 @@ package o.mysin.sportsnewsviewer.features.detailsfeed.presentation
 
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import o.mysin.sportsnewsviewer.R
 import o.mysin.sportsnewsviewer.base.BaseViewModel
 import o.mysin.sportsnewsviewer.data.mappers.MapNewsDetailsDTOToNewsDetailsUI
 import o.mysin.sportsnewsviewer.data.utils.Either
@@ -20,6 +21,7 @@ internal class DetailsFeedViewModel(
     private val toNewsDetailUI: MapNewsDetailsDTOToNewsDetailsUI,
 ) :
     BaseViewModel<DetailsFeedViewState, DetailsFeedAction, DetailsFeedEvent>(initialState = DetailsFeedViewState()) {
+
     override fun obtainEvent(viewEvent: DetailsFeedEvent) {
         when (viewEvent) {
             DetailsFeedEvent.ArrowBackPressed -> arrowBackPressed()
@@ -29,6 +31,7 @@ internal class DetailsFeedViewModel(
 
             DetailsFeedEvent.FavoriteIconPressed -> {
                 changeExistsFavoriteNewsDatabase()
+
             }
         }
     }
@@ -68,8 +71,12 @@ internal class DetailsFeedViewModel(
     private fun updateExistFavoriteNewsDatabase() {
         viewModelScope.launch {
             val newsId = viewState.newsDetails.id
-            viewState =
-                viewState.copy(isNewsFavorite = checkExistsNewsDatabaseUseCase.invoke(newsId))
+            val checkExists = checkExistsNewsDatabaseUseCase.invoke(newsId)
+            viewState = viewState.copy(isNewsFavorite = checkExists)
+            viewAction = DetailsFeedAction.PutToast(
+                if (checkExists) R.string.toast_add_news_bd else
+                    R.string.toast_removed_news_bd
+            )
         }
     }
 
