@@ -42,22 +42,26 @@ internal fun DetailsFeedScreen(
         BaseStatusScreen.ERROR -> TODO()
     }
 
-    when (viewAction) {
-        DetailsFeedAction.BackMainScreen -> {
-            arrowBackPressed()
-            detailsFeedViewModel.clearAction()
+
+    viewAction?.let { viewActionCurrent ->
+        when (viewActionCurrent) {
+
+            DetailsFeedAction.BackMainScreen -> {
+                arrowBackPressed()
+                detailsFeedViewModel.clearAction()
+            }
+
+            is DetailsFeedAction.PutToast -> {
+                val messageId = viewActionCurrent.messageIdRes
+                Toast.makeText(
+                    LocalContext.current,
+                    stringResource(messageId),
+                    Toast.LENGTH_SHORT
+                ).show()
+                detailsFeedViewModel.clearAction()
+            }
         }
 
-        is DetailsFeedAction.PutToast -> {
-            val messageId = (viewAction as DetailsFeedAction.PutToast).messageIdRes
-            Toast.makeText(
-                LocalContext.current,
-                stringResource(messageId),
-                Toast.LENGTH_SHORT
-            ).show()
-            detailsFeedViewModel.clearAction()
-        }
-
-        null -> {}
     }
+
 }

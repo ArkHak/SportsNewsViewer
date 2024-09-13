@@ -18,7 +18,7 @@ internal val LocalThemeIsDark = compositionLocalOf { mutableStateOf(false) }
 internal fun AppTheme(
     content: @Composable() () -> Unit,
 ) {
-    var systemIsDark = isSystemInDarkTheme()
+    val systemIsDark = isSystemInDarkTheme()
     val isDarkState = remember { mutableStateOf(systemIsDark) }
     CompositionLocalProvider(
         LocalThemeIsDark provides isDarkState,

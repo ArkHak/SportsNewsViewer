@@ -1,4 +1,4 @@
-package o.mysin.sportsnewsviewer.features.favorite.presentation.di
+package o.mysin.sportsnewsviewer.features.favorite.di
 
 import o.mysin.sportsnewsviewer.features.favorite.presentation.FavoriteViewModel
 import o.mysin.sportsnewsviewer.features.favorite.presentation.usecase.GetFavoriteNewsListUseCase

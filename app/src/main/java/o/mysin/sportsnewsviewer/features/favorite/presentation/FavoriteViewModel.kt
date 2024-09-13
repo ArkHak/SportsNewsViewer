@@ -39,26 +39,6 @@ internal class FavoriteViewModel(
         }
     }
 
-    //private fun loadingNews() {
-    //        viewState = viewState.copy(isStatus = BaseStatusScreen.LOADING)
-    //        viewModelScope.launch {
-    //            when (val eitherResponse = getNewsListUseCase.invoke()) {
-    //                is Either.Success -> {
-    //                    viewState = viewState.copy(
-    //                        newsList = eitherResponse.value.listNews.map { newsItemDTO ->
-    //                            toNewsItemUI.transform(newsItemDTO)
-    //                        },
-    //                        isStatus = BaseStatusScreen.SUCCESS
-    //                    )
-    //                }
-    //
-    //                is Either.Fail -> {
-    //                    viewState = viewState.copy(isStatus = BaseStatusScreen.ERROR)
-    //                }
-    //            }
-    //        }
-    //    }
-
 
     private fun feedClicked(feedId: Int) {
         viewAction = FavoriteAction.OpenDetailFeedScreen(feedId)

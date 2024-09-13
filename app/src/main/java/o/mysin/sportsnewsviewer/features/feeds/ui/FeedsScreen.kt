@@ -52,6 +52,7 @@ internal fun FeedsScreen(
 
             is FeedsAction.UpdateAppTheme -> {
                 LocalThemeIsDark.current.value = viewActionCurrent.isDarkTheme
+                feedsViewModel.clearAction()
             }
         }
     }

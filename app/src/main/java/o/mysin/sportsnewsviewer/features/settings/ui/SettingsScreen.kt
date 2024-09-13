@@ -21,24 +21,27 @@ internal fun SettingsScreen(
         settingsViewModel.obtainEvent(event)
     }
 
-    when (viewAction) {
-        SettingsAction.openDialogCleanBD -> {
-            SettingsAlertDialogView { event ->
-                settingsViewModel.obtainEvent(event)
+
+    viewAction?.let { viewActionCurrent ->
+        when (viewActionCurrent) {
+
+            SettingsAction.openDialogCleanBD -> {
+                SettingsAlertDialogView { event ->
+                    settingsViewModel.obtainEvent(event)
+                }
             }
-        }
 
-        is SettingsAction.PutToast -> {
-            val messageId = (viewAction as SettingsAction.PutToast).messageIdRes
-            Toast.makeText(
-                LocalContext.current,
-                stringResource(messageId),
-                Toast.LENGTH_SHORT
-            ).show()
-            settingsViewModel.clearAction()
-        }
+            is SettingsAction.PutToast -> {
+                val messageId = viewActionCurrent.messageIdRes
+                Toast.makeText(
+                    LocalContext.current,
+                    stringResource(messageId),
+                    Toast.LENGTH_SHORT
+                ).show()
+                settingsViewModel.clearAction()
+            }
 
-        null -> {}
+        }
     }
 
 

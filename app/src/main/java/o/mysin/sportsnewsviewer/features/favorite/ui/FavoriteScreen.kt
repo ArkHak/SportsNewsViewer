@@ -43,13 +43,14 @@ internal fun FavoriteScreen(
         BaseStatusScreen.ERROR -> {}
     }
 
-
-    when (viewAction) {
-        null -> {}
-        is FavoriteAction.OpenDetailFeedScreen -> {
-            val id = (viewAction as FavoriteAction.OpenDetailFeedScreen).feedId
-            feedClick(id)
-            favoriteViewModel.clearAction()
+    viewAction?.let { viewActionCurrent ->
+        when (viewActionCurrent) {
+            is FavoriteAction.OpenDetailFeedScreen -> {
+                val id = viewActionCurrent.feedId
+                feedClick(id)
+                favoriteViewModel.clearAction()
+            }
         }
     }
+
 }

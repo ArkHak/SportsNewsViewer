@@ -5,7 +5,7 @@ import o.mysin.sportsnewsviewer.data.di.mappersModule
 import o.mysin.sportsnewsviewer.database.di.databaseModule
 import o.mysin.sportsnewsviewer.di.appModule
 import o.mysin.sportsnewsviewer.features.detailsfeed.di.detailsFeedModule
-import o.mysin.sportsnewsviewer.features.favorite.presentation.di.favoriteModule
+import o.mysin.sportsnewsviewer.features.favorite.di.favoriteModule
 import o.mysin.sportsnewsviewer.features.feeds.di.feedsModule
 import o.mysin.sportsnewsviewer.features.settings.di.settingsModule
 import o.mysin.sportsnewsviewer.network.di.networkModule
