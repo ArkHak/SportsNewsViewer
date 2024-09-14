@@ -1,6 +1,7 @@
 package o.mysin.sportsnewsviewer.navigations.main
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
@@ -57,11 +58,12 @@ fun MainScreen() {
     val navController = rememberNavController()
     val items = BottomTabs.entries.toTypedArray()
     Scaffold(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize()
+            .background(color = SportsTheme.colors.primaryBackground),
         bottomBar = {
             BottomNavigation(
                 modifier = Modifier,
-                backgroundColor = MaterialTheme.colors.surface
+                backgroundColor = SportsTheme.colors.bottomNavigation
             ) {
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
                 val currentDestination =

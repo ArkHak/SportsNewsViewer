@@ -46,8 +46,8 @@ internal fun FeedCard(
         modifier = Modifier
             .padding(vertical = dimensionResource(R.dimen.extra_small_padding)),
         colors = CardColors(
-            contentColor = SportsTheme.colors.primaryBackground,
-            containerColor = SportsTheme.colors.primaryBackground,
+            contentColor = SportsTheme.colors.primaryText,
+            containerColor = SportsTheme.colors.cardBackground,
             disabledContainerColor = SportsTheme.colors.primaryBackground,
             disabledContentColor = SportsTheme.colors.primaryBackground,
         ),
