@@ -13,7 +13,7 @@ import o.mysin.sportsnewsviewer.data.utils.Either
 import o.mysin.sportsnewsviewer.features.feeds.presentation.models.FeedsAction
 import o.mysin.sportsnewsviewer.features.feeds.presentation.models.FeedsEvent
 import o.mysin.sportsnewsviewer.features.feeds.presentation.models.FeedsViewState
-import o.mysin.sportsnewsviewer.features.feeds.presentation.usecase.GetNewsListUseCase
+import o.mysin.sportsnewsviewer.features.feeds.domain.usecase.GetNewsListUseCase
 
 internal class FeedsViewModel(
     private val getNewsListUseCase: GetNewsListUseCase,

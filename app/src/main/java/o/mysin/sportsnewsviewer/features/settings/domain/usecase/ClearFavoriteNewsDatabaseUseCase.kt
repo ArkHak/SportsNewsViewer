@@ -1,4 +1,4 @@
-package o.mysin.sportsnewsviewer.features.settings.presentation.usecase
+package o.mysin.sportsnewsviewer.features.settings.domain.usecase
 
 import o.mysin.sportsnewsviewer.data.NewsRepository
 

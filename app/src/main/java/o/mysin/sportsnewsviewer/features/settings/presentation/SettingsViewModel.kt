@@ -9,8 +9,8 @@ import o.mysin.sportsnewsviewer.data.DataStoreManager
 import o.mysin.sportsnewsviewer.features.settings.presentation.models.SettingsAction
 import o.mysin.sportsnewsviewer.features.settings.presentation.models.SettingsEvent
 import o.mysin.sportsnewsviewer.features.settings.presentation.models.SettingsViewState
-import o.mysin.sportsnewsviewer.features.settings.presentation.usecase.CheckEmptyFavoriteNewsDatabaseUseCase
-import o.mysin.sportsnewsviewer.features.settings.presentation.usecase.ClearFavoriteNewsDatabaseUseCase
+import o.mysin.sportsnewsviewer.features.settings.domain.usecase.CheckEmptyFavoriteNewsDatabaseUseCase
+import o.mysin.sportsnewsviewer.features.settings.domain.usecase.ClearFavoriteNewsDatabaseUseCase
 
 internal class SettingsViewModel(
     private val clearFavoriteNewsDatabaseUseCase: ClearFavoriteNewsDatabaseUseCase,

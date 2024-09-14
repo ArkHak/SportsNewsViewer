@@ -7,7 +7,7 @@ import o.mysin.sportsnewsviewer.base.BaseViewModel
 import o.mysin.sportsnewsviewer.features.favorite.presentation.models.FavoriteAction
 import o.mysin.sportsnewsviewer.features.favorite.presentation.models.FavoriteEvent
 import o.mysin.sportsnewsviewer.features.favorite.presentation.models.FavoriteViewState
-import o.mysin.sportsnewsviewer.features.favorite.presentation.usecase.GetFavoriteNewsListUseCase
+import o.mysin.sportsnewsviewer.features.favorite.domain.usecase.GetFavoriteNewsListUseCase
 
 internal class FavoriteViewModel(
     private val getFavoriteNewsListUseCase: GetFavoriteNewsListUseCase,

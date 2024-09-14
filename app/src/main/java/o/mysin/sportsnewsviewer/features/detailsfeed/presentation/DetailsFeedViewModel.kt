@@ -10,9 +10,9 @@ import o.mysin.sportsnewsviewer.data.utils.Either
 import o.mysin.sportsnewsviewer.features.detailsfeed.presentation.models.DetailsFeedAction
 import o.mysin.sportsnewsviewer.features.detailsfeed.presentation.models.DetailsFeedEvent
 import o.mysin.sportsnewsviewer.features.detailsfeed.presentation.models.DetailsFeedViewState
-import o.mysin.sportsnewsviewer.features.detailsfeed.presentation.usecase.CheckExistsNewsDatabaseUseCase
-import o.mysin.sportsnewsviewer.features.detailsfeed.presentation.usecase.GetNewsByIdUseCase
-import o.mysin.sportsnewsviewer.features.detailsfeed.presentation.usecase.ChangeExistsNewsDatabaseUseCase
+import o.mysin.sportsnewsviewer.features.detailsfeed.domain.usecase.CheckExistsNewsDatabaseUseCase
+import o.mysin.sportsnewsviewer.features.detailsfeed.domain.usecase.GetNewsByIdUseCase
+import o.mysin.sportsnewsviewer.features.detailsfeed.domain.usecase.ChangeExistsNewsDatabaseUseCase
 
 internal class DetailsFeedViewModel(
     private val getNewsByIdUseCase: GetNewsByIdUseCase,
