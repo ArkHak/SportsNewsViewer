@@ -1,4 +1,4 @@
-package o.mysin.sportsnewsviewer.features.favorite.presentation.usecase
+package o.mysin.sportsnewsviewer.features.favorite.domain.usecase
 
 import o.mysin.sportsnewsviewer.utils.IsEqualsTwoList.isEqualsTwoList
 

@@ -1,4 +1,4 @@
-package o.mysin.sportsnewsviewer.features.feeds.presentation.usecase
+package o.mysin.sportsnewsviewer.features.feeds.domain.usecase
 
 import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow

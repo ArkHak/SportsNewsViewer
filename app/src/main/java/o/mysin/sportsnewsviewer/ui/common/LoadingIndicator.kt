@@ -1,5 +1,6 @@
 package o.mysin.sportsnewsviewer.ui.common
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,7 +17,8 @@ import o.mysin.sportsnewsviewer.ui.theme.SportsTheme
 internal fun LoadingIndicator() {
     Column(
         modifier = Modifier
-            .fillMaxSize(),
+            .fillMaxSize()
+            .background(color = SportsTheme.colors.primaryBackground),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

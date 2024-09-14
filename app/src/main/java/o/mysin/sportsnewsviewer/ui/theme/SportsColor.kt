@@ -9,9 +9,11 @@ data class SportsColors(
     val primaryBackground: Color,
     val secondaryText: Color,
     val secondaryBackground: Color,
+    val cardBackground: Color,
     val accentColor: Color,
     val warningColor: Color,
     val onWarningColor: Color,
+    val bottomNavigation: Color
 )
 
 object SportsTheme {

@@ -1,9 +1,9 @@
 package o.mysin.sportsnewsviewer
 
 import android.app.Application
-import o.mysin.sportsnewsviewer.data.di.mappersModule
+import o.mysin.sportsnewsviewer.data.di.dataModule
+import o.mysin.sportsnewsviewer.data.di.mappersDataModule
 import o.mysin.sportsnewsviewer.database.di.databaseModule
-import o.mysin.sportsnewsviewer.di.appModule
 import o.mysin.sportsnewsviewer.features.detailsfeed.di.detailsFeedModule
 import o.mysin.sportsnewsviewer.features.favorite.di.favoriteModule
 import o.mysin.sportsnewsviewer.features.feeds.di.feedsModule
@@ -20,14 +20,14 @@ class SportsApplication : Application() {
             androidLogger()
             androidContext(this@SportsApplication)
             modules(
-                appModule,
                 feedsModule,
                 detailsFeedModule,
                 networkModule,
                 databaseModule,
                 settingsModule,
                 favoriteModule,
-                mappersModule
+                mappersDataModule,
+                dataModule
             )
         }
     }

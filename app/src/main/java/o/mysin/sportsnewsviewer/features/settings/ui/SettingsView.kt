@@ -1,5 +1,6 @@
 package o.mysin.sportsnewsviewer.features.settings.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -38,6 +39,7 @@ internal fun SettingsView(
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .background(color = SportsTheme.colors.primaryBackground)
             .padding(
                 horizontal = dimensionResource(R.dimen.normal_large_padding_space),
                 vertical = dimensionResource(R.dimen.extra_large_padding_space)

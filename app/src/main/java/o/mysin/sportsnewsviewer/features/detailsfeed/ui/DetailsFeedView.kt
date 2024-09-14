@@ -1,9 +1,11 @@
 package o.mysin.sportsnewsviewer.features.detailsfeed.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -44,6 +46,10 @@ internal fun DetailsFeedView(
 ) {
 
     Scaffold(
+        modifier = Modifier
+            .fillMaxHeight(),
+        drawerBackgroundColor = SportsTheme.colors.primaryBackground,
+        backgroundColor = SportsTheme.colors.primaryBackground,
         topBar = {
             TopAppBar(
                 modifier = Modifier,
@@ -87,6 +93,7 @@ internal fun DetailsFeedView(
             Modifier
                 .verticalScroll(scrollState)
                 .fillMaxSize()
+                .background(color = SportsTheme.colors.primaryBackground)
                 .padding(innerPadding)
                 .padding(dimensionResource(R.dimen.large_padding_space))
         ) {
