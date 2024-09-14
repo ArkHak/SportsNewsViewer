@@ -7,7 +7,7 @@ import o.mysin.sportsnewsviewer.data.mappers.uiToEntity.MapNewsDetailUiToFavorit
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
-val mappersModule = module {
+val mappersDataModule = module {
     singleOf(::MapNewsDetailsDTOToNewsDetailsUI)
     singleOf(::MapNewsItemDTOToNewsItemUI)
     singleOf(::MapNewsDetailUiToFavoriteNewsEntity)
